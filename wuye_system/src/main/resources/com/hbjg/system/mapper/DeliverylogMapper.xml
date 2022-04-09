@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.DeliverylogMapper">
+    <select id="selectDlogMyPage"
+            resultType="com.hbjg.system.pojo.DeliverylogListDto">
+
+        SELECT
+            tb_deliverylog.dlid,
+            tb_user.NAME,
+            tb_property.pname,
+            tb_deliverylog.spec,
+            tb_deliverylog.number,
+            tb_deliverylog.type2,
+            tb_deliverylog.type,
+            tb_deliverylog.deliveryDate,
+            tb_deliverylog.imgSrc,
+            tb_deliverylog.remark
+        FROM
+            tb_deliverylog
+            LEFT JOIN tb_user ON tb_deliverylog.NAME = tb_user.uid
+            LEFT JOIN tb_property ON tb_deliverylog.pname = tb_property.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+
+</mapper>

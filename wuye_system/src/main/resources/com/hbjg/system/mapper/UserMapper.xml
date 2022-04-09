@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.UserMapper">
+    <select id="selectUserMyPage"
+            resultType="com.hbjg.system.pojo.UserListDto">
+
+        select
+            tb_user.uid,
+	        tb_user.username,
+	        tb_user.password,
+	        tb_user.name,
+	        tb_user.phone,
+	        tb_role.rname,
+	        tb_department.dname,
+	        tb_user.joindate
+	    from tb_user
+	        left join tb_role on tb_user.role = tb_role.rid
+	        left join tb_department on tb_user.department = tb_department.did
+	    ${ew.customSqlSegment}
+
+    </select>
+
+	<update id="updateRole" parameterType="integer">
+		update
+			tb_user
+		set
+			role=#{rid}
+		where
+			uid=#{uid}
+	</update>
+
+</mapper>

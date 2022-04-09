@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.LendlogMapper">
+    <select id="selectLendlogMyPage"
+            resultType="com.hbjg.system.pojo.LendlogListDto">
+
+        SELECT
+            tb_lendlog.llid,
+            tb_storageitems.sname,
+            u1.username as jiechuren,
+            tb_property.pname,
+            u2.username as tongyiren,
+            tb_lendlog.time,
+            tb_lendlog.number,
+            tb_lendlog.`status`,
+            tb_lendlog.imgSrc,
+            tb_lendlog.remark
+        FROM
+            tb_lendlog
+            LEFT JOIN tb_storageitems  ON tb_storageitems.sid = tb_lendlog.sid
+            LEFT JOIN tb_user u1 ON u1.uid = tb_lendlog.uid1
+            LEFT JOIN tb_user u2 ON u2.uid = tb_lendlog.uid2
+            LEFT JOIN tb_property ON tb_property.pid = tb_lendlog.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.PropertyMapper">
+    <select id="selectProMyPage"
+            resultType="com.hbjg.system.pojo.PropertyListDto">
+
+        select
+            tb_property.pid,
+	        tb_property.pname,
+	        tb_property.spec,
+	        tb_property.number,
+	        tb_type.tname,
+	        tb_type2.t2name,
+	        tb_storageitems.sname,
+	        tb_property.remark
+	    from tb_property
+	        left join tb_type on tb_property.type = tb_type.tid
+	        left join tb_storageitems on tb_property.storageitems = tb_storageitems.sid
+	        left join tb_type2 on tb_property.type2 = tb_type2.t2id
+	    ${ew.customSqlSegment}
+
+    </select>
+
+	<update id="addNum" parameterType="integer" >
+		update tb_property set number=number+${number} where pid=${pid}
+	</update>
+
+	<update id="subNum" parameterType="integer">
+		update tb_property set number=number-${number} where pid=${pid}
+	</update>
+
+	<select id="selectProByName" resultType="com.hbjg.system.pojo.Property">
+		select
+			*
+		from
+			tb_property
+		where
+			pname=${pname}
+
+	</select>
+
+    <select id="selectProByNameAndSpec" resultType="com.hbjg.system.pojo.Property">
+		select
+			*
+		from
+			tb_property
+		where
+			pname='${pname}' and spec='${spec}'
+	</select>
+
+	<select id="selectProByNameAndSpecAndType" resultType="com.hbjg.system.pojo.Property">
+
+		select
+			*
+		from
+			tb_property
+		where
+			pname='${pname}' and spec='${spec}'and type=${type} and type2=${type2}
+	</select>
+</mapper>

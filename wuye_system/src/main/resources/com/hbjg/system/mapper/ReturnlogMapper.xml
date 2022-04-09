@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.ReturnlogMapper">
+    <select id="selectReturnlogMyPage"
+            resultType="com.hbjg.system.pojo.ReturnlogListDto">
+
+        SELECT
+            tb_returnlog.rlid,
+            tb_storageitems.sname,
+            u1.username as guihuanren,
+            tb_property.pname,
+            u2.username as tongyiren,
+            tb_returnlog.time,
+            tb_returnlog.number,
+            tb_returnlog.`status`,
+            tb_returnlog.imgSrc,
+            tb_returnlog.remark
+        FROM
+            tb_returnlog
+            LEFT JOIN tb_storageitems  ON tb_storageitems.sid = tb_returnlog.sid
+            LEFT JOIN tb_user u1 ON u1.uid = tb_returnlog.uid1
+            LEFT JOIN tb_user u2 ON u2.uid = tb_returnlog.uid2
+            LEFT JOIN tb_property ON tb_property.pid = tb_returnlog.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+</mapper>

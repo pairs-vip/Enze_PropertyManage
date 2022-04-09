@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.SlrMapper">
+    <select id="selectByUidAndPid"  parameterType="integer" resultType="com.hbjg.system.pojo.Slr">
+		select
+			*
+		from
+			tb_slr
+		where
+			uid=#{uid} and pid=#{pid}
+    </select>
+
+	<select id="selectAll" resultType="com.hbjg.system.pojo.SlrListDto">
+		 select
+			s.slrid,
+			u.name,
+			p.pname,
+			s.number
+		from
+			tb_slr s
+		left join tb_user u on s.uid = u.uid
+		left join tb_property p on s.pid = p.pid
+	</select>
+
+	<update id="AddNumByUidAndPid" parameterType="integer">
+		update
+			tb_slr
+		set
+			number=number+#{number}
+		where
+			uid=#{uid} and pid=#{pid}
+	</update>
+
+	<update id="SubNumByUidAndPid" parameterType="integer">
+		update
+			tb_slr
+		set
+			number=number-#{number}
+		where
+			uid=#{uid} and pid=#{pid}
+	</update>
+</mapper>

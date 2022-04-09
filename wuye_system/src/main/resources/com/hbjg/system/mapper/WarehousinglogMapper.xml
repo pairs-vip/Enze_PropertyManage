@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.WarehousinglogMapper">
+    <select id="selectWlogMyPage"
+            resultType="com.hbjg.system.pojo.WarehousinglogListDto">
+
+        SELECT
+            tb_warehousinglog.wlid,
+            tb_user.NAME,
+            tb_property.pname,
+            tb_warehousinglog.spec,
+            tb_warehousinglog.number,
+            tb_warehousinglog.type2,
+            tb_warehousinglog.type,
+            tb_warehousinglog.warehousingDate,
+            tb_warehousinglog.imgSrc,
+            tb_warehousinglog.remark
+        FROM
+            tb_warehousinglog
+            LEFT JOIN tb_user ON tb_warehousinglog.NAME = tb_user.uid
+            LEFT JOIN tb_property ON tb_warehousinglog.pname = tb_property.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+
+</mapper>
