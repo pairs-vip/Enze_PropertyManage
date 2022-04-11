@@ -11,11 +11,11 @@ public class ReturnlogListDto {
 
     @TableId(value = "rlid")
     private Integer rlid;
-    private String sname;
-    private String guihuanren;
+    private String returnee;
     private String pname;
-    private String tongyiren;
+    private String reviewer;
     private Integer number;
+    private String spec;
     private String status;
     private Date time;
     private String imgSrc;

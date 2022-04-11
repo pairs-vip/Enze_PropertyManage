@@ -1,6 +1,5 @@
-package com.hbjg.system.controller;
+package com.hbjg.system.phoneController;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.hbjg.system.controller.utils.R;
 import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Lendlog;
@@ -8,19 +7,19 @@ import com.hbjg.system.service.ISlrService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 
-@CrossOrigin
 @RestController
-@RequestMapping("/slrs")
-public class SlrController {
+@RequestMapping("/phoneslrs")
+public class PhoneSlrController {
 
     @Autowired
     private ISlrService iSlrService;
 
-    //汇总表，查看当前有哪些资产被谁借走了多少等
+    //汇总表，查看当前登录用户未归还资产名称及数量
     @GetMapping("/{currentPage}/{pageSize}")
-    public R getSlrMyPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, @RequestBody Condition condition){
-       return new R(true,iSlrService.selectSlrMyPage(currentPage,pageSize,condition));
+    public R getSlrMyPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, @RequestBody Condition condition, HttpSession session){
+       return new R(true,iSlrService.selectSlrMyPageForUser(currentPage,pageSize,condition,session));
     }
 
     //每次借出通过审核就要进行修改汇总表

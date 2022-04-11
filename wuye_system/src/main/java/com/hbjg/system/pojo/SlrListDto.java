@@ -9,4 +9,5 @@ public class SlrListDto {
     private String name;
     private String pname;
     private Integer number;
+    private String spec;
 }

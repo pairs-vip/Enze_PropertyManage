@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbjg.system.mapper.LendlogMapper;
+import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Lendlog;
 import com.hbjg.system.pojo.LendlogListDto;
 import org.junit.jupiter.api.Test;

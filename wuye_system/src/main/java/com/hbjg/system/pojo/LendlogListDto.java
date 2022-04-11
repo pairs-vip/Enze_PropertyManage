@@ -12,11 +12,11 @@ public class LendlogListDto {
 
     @TableId(value = "llid")
     private Integer llid;
-    private String sname;
-    private String jiechuren;
+    private String borrower;
     private String pname;
-    private String tongyiren;
+    private String reviewer;
     private Integer number;
+    private String spec;
     private String status;
     private Date time;
     private String imgSrc;

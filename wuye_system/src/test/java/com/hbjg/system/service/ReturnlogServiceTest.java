@@ -4,6 +4,7 @@ package com.hbjg.system.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Returnlog;
 import com.hbjg.system.pojo.ReturnlogListDto;
 import com.sun.org.apache.regexp.internal.RE;
@@ -21,7 +22,7 @@ public class ReturnlogServiceTest {
 
     @Test
     public void test01(){
-        Returnlog returnlog = new Returnlog();
-        iReturnlogService.getReturnlogMyPage(1,10,returnlog);
+        Condition condition = new Condition();
+        iReturnlogService.getReturnlogMyPage(1,10,condition);
     }
 }

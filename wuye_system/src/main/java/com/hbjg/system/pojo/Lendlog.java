@@ -12,7 +12,6 @@ public class Lendlog {
 
     @TableId(value = "llid")
     private Integer llid;
-    private Integer sid;
     private Integer uid1;
     private Integer pid;
     private Integer uid2;

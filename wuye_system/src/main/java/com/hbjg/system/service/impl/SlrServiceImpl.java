@@ -1,14 +1,17 @@
 package com.hbjg.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbjg.system.mapper.SlrMapper;
-import com.hbjg.system.pojo.Lendlog;
-import com.hbjg.system.pojo.Slr;
-import com.hbjg.system.pojo.SlrListDto;
+import com.hbjg.system.pojo.*;
 import com.hbjg.system.service.ISlrService;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Service
@@ -20,8 +23,36 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
 
     //查看当前所有纪录。
     @Override
-    public List<SlrListDto> selectAll() {
-        return slrMapper.selectAll();
+    public IPage<SlrListDto> selectSlrMyPageForUser(Integer currentPage, Integer pageSize, Condition condition, HttpSession session) {
+       IPage<SlrListDto> page = new Page<>(currentPage,pageSize);
+
+        QueryWrapper<Condition> queryWrapper = new QueryWrapper<>();
+        if(Strings.isNotEmpty(condition.getPropertyName())){
+            queryWrapper.like("tb_property.pname",condition.getPropertyName());
+        }
+        User user = (User) session.getAttribute("user");
+        if(user!=null){
+            queryWrapper.eq("s.uid",user.getUid());
+        }
+
+        page = slrMapper.selectSlrMyPage(page,queryWrapper);
+
+        return page;
+    }
+
+    @Override
+    public IPage<SlrListDto> selectSlrMyPage(Integer currentPage, Integer pageSize, Condition condition) {
+
+        IPage<SlrListDto> page = new Page<>(currentPage,pageSize);
+
+        QueryWrapper<Condition> queryWrapper = new QueryWrapper<>();
+        if(Strings.isNotEmpty(condition.getPropertyName())){
+            queryWrapper.like("tb_property.pname",condition.getPropertyName());
+        }
+
+        page = slrMapper.selectSlrMyPage(page,queryWrapper);
+
+        return page;
     }
 
     //通过用户id和物品id查找汇总表中得纪录。

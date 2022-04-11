@@ -11,7 +11,6 @@ public class Returnlog {
 
     @TableId(value = "rlid")
     private Integer rlid;
-    private Integer sid;
     private Integer uid1;
     private Integer pid;
     private Integer uid2;

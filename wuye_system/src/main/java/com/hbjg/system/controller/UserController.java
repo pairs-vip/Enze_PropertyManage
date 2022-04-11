@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.pojo.A;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
 import com.hbjg.system.service.IUserService;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBody
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -102,5 +105,25 @@ public class UserController {
             page = iUserService.getUserMyPage((int)page.getPages(),pageSize,user);
         }
         return new R(true,page);
+    }
+
+    //前端测试登录
+    @GetMapping("/doLogins")
+    public R loLogins(){
+        System.out.println("shoudao.........");
+        A a =new A();
+        a.setToken("admin");
+        return new R(true,20000,a);
+    }
+    //测试信息获取
+    @GetMapping("/getInfo")
+    public R getInfo(){
+        System.out.println("shoudao1 ................");
+        A a =new A();
+        a.setRoles("[admin]");
+        a.setIntroduction("I am a super administrator");
+        a.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        a.setName("super admin");
+        return  new R(true,20000,a);
     }
 }

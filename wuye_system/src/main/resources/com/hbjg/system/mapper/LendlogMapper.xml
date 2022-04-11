@@ -7,18 +7,40 @@
 
         SELECT
             tb_lendlog.llid,
-            tb_storageitems.sname,
-            u1.username as jiechuren,
+            u1.username as borrower,
             tb_property.pname,
-            u2.username as tongyiren,
+            u2.username as reviewer,
             tb_lendlog.time,
             tb_lendlog.number,
+            tb_property.spec,
             tb_lendlog.`status`,
             tb_lendlog.imgSrc,
             tb_lendlog.remark
         FROM
             tb_lendlog
-            LEFT JOIN tb_storageitems  ON tb_storageitems.sid = tb_lendlog.sid
+            LEFT JOIN tb_user u1 ON u1.uid = tb_lendlog.uid1
+            LEFT JOIN tb_user u2 ON u2.uid = tb_lendlog.uid2
+            LEFT JOIN tb_property ON tb_property.pid = tb_lendlog.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+
+    <select id="selectLendlogMyPageByCon"
+            resultType="com.hbjg.system.pojo.LendlogListDto">
+
+        SELECT
+            tb_lendlog.llid,
+            u1.username as borrower,
+            tb_property.pname,
+            u2.username as reviewer,
+            tb_lendlog.time,
+            tb_lendlog.number,
+            tb_property.spec,
+            tb_lendlog.`status`,
+            tb_lendlog.imgSrc,
+            tb_lendlog.remark
+        FROM
+            tb_lendlog
             LEFT JOIN tb_user u1 ON u1.uid = tb_lendlog.uid1
             LEFT JOIN tb_user u2 ON u2.uid = tb_lendlog.uid2
             LEFT JOIN tb_property ON tb_property.pid = tb_lendlog.pid

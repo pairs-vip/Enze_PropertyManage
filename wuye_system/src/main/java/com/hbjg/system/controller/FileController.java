@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.hbjg.system.controller.utils.R;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
  * @Auth: zhuan
  * @Desc: 文件上传-控制器
  */
+
+@CrossOrigin
 @RestController
 @RequestMapping("/estate")
 public class FileController {

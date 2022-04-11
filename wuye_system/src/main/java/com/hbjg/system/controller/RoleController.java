@@ -7,6 +7,8 @@ import com.hbjg.system.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/roles")
 public class RoleController {

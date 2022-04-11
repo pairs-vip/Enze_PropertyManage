@@ -6,6 +6,8 @@ import com.hbjg.system.service.ITypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+
+@CrossOrigin
 @RestController
 @RequestMapping("/types")
 public class TypeController {

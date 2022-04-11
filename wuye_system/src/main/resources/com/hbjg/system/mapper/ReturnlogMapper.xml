@@ -7,18 +7,17 @@
 
         SELECT
             tb_returnlog.rlid,
-            tb_storageitems.sname,
-            u1.username as guihuanren,
+            u1.username as returnee,
             tb_property.pname,
-            u2.username as tongyiren,
+            u2.username as reviewer,
             tb_returnlog.time,
             tb_returnlog.number,
+            tb_property.spec,
             tb_returnlog.`status`,
             tb_returnlog.imgSrc,
             tb_returnlog.remark
         FROM
             tb_returnlog
-            LEFT JOIN tb_storageitems  ON tb_storageitems.sid = tb_returnlog.sid
             LEFT JOIN tb_user u1 ON u1.uid = tb_returnlog.uid1
             LEFT JOIN tb_user u2 ON u2.uid = tb_returnlog.uid2
             LEFT JOIN tb_property ON tb_property.pid = tb_returnlog.pid

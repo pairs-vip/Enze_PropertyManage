@@ -15,11 +15,6 @@ public class SlrMapperTest {
     @Autowired
     private SlrMapper slrMapper;
 
-    @Test
-    public void test01(){
-        List<SlrListDto> slrListDtos = slrMapper.selectAll();
-        System.out.println(slrListDtos);
-    }
 
     @Test
     public void test02(){

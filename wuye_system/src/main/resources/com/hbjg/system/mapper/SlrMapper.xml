@@ -11,16 +11,18 @@
 			uid=#{uid} and pid=#{pid}
     </select>
 
-	<select id="selectAll" resultType="com.hbjg.system.pojo.SlrListDto">
+	<select id="selectSlrMyPage" resultType="com.hbjg.system.pojo.SlrListDto">
 		 select
 			s.slrid,
 			u.name,
 			p.pname,
-			s.number
+			s.number,
+			p.spec
 		from
 			tb_slr s
 		left join tb_user u on s.uid = u.uid
 		left join tb_property p on s.pid = p.pid
+		${ew.customSqlSegment}
 	</select>
 
 	<update id="AddNumByUidAndPid" parameterType="integer">

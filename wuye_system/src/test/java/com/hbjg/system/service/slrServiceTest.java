@@ -14,9 +14,4 @@ public class slrServiceTest {
     @Autowired
     private ISlrService iSlrService;
 
-    @Test
-    public void test01(){
-        List<SlrListDto> slrListDtos = iSlrService.selectAll();
-        System.out.println(slrListDtos);
-    }
 }
