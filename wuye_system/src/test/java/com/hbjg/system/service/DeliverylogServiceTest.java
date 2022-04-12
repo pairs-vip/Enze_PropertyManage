@@ -1,6 +1,7 @@
 package com.hbjg.system.service;
 
 
+import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.DeliverylogListDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,7 @@ public class DeliverylogServiceTest {
     @Test
     public void selectallmypage(){
 
-        DeliverylogListDto deliverylogListDto = new DeliverylogListDto();
-        deliverylogListDto.setName("三");
-        iDeliverylogService.selectDlogMyPage(2,1,deliverylogListDto);
+        Condition condition = new Condition();;
+        iDeliverylogService.selectDlogMyPage(2,1,condition);
     }
 }

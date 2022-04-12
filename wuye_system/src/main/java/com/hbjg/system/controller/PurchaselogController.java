@@ -2,6 +2,7 @@ package com.hbjg.system.controller;
 
 
 import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Purchaselog;
 import com.hbjg.system.service.IPurchaselogService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,18 @@ public class PurchaselogController {
     }
 
     //查询纪录
-    @GetMapping
-    public R getAll(){
-        return new R(true,iPurchaselogService.list());
+    @GetMapping("/{currentPage}/{pageSize}")
+    public R getPurchaselogMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,@RequestBody Condition condition){
+        return new R(true,iPurchaselogService.selectPurlogMyPage(currentPage,pageSize,condition));
+    }
+    //修改采购信息
+    @PutMapping
+    public R updatePurchaselog(@RequestBody Purchaselog purchaselog){
+        return new R(true,iPurchaselogService.updateById(purchaselog));
+    }
+    //删除采购信息
+    @DeleteMapping("/{id}")
+    public R deletePurchaselog(@PathVariable Integer id){
+        return new R(true,iPurchaselogService.removeById(id));
     }
 }

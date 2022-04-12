@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbjg.system.mapper.DeliverylogMapper;
+import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Deliverylog;
 import com.hbjg.system.pojo.DeliverylogListDto;
 import com.hbjg.system.service.IDeliverylogService;
+import jdk.nashorn.internal.ir.CallNode;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,12 +22,19 @@ public class DeliverylogServiceImpl extends ServiceImpl<DeliverylogMapper, Deliv
     private DeliverylogMapper deliverylogMapper;
 
     @Override
-    public IPage<DeliverylogListDto> selectDlogMyPage(Integer currentPage, Integer pageSize, DeliverylogListDto deliverylogListDto) {
+    public IPage<DeliverylogListDto> selectDlogMyPage(Integer currentPage, Integer pageSize, Condition condition) {
         IPage<DeliverylogListDto> page = new Page<>(currentPage,pageSize);
         QueryWrapper<DeliverylogListDto> queryWrapper = new QueryWrapper<>();
-        if(Strings.isNotEmpty(deliverylogListDto.getName())) {
-            queryWrapper.like("tb_user.name", deliverylogListDto.getName());
+        if(Strings.isNotEmpty(condition.getPropertyName())) {
+            queryWrapper.like("tb_property.pname", condition.getPropertyName());
         }
-        return deliverylogMapper.selectDlogMyPage(page,queryWrapper);
+        if(Strings.isNotEmpty(condition.getBegin())){
+            queryWrapper.ge("tb_deliverylog.deliveryDate",condition.getBegin());
+        }
+        if(Strings.isNotEmpty(condition.getEnd())){
+            queryWrapper.le("tb_deliverylog.deliveryDate",condition.getEnd());
+        }
+        page = deliverylogMapper.selectDlogMyPage(page, queryWrapper);
+        return page;
     }
 }

@@ -13,8 +13,8 @@ public class WarehousinglogListDto {
     private String pname;
     private String spec;
     private Integer number;
-    private String type;
-    private String type2;
+    private String tname;
+    private String t2name;
     private Date warehousingDate;
     private String imgSrc;
     private String remark;

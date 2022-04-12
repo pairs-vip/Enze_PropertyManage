@@ -26,19 +26,20 @@ public class PropertyServiceImpl extends ServiceImpl<PropertyMapper, Property> i
     @Override
     public IPage<PropertyListDto> getProMyPage(Integer currentPage, Integer pageSize, Property property) {
 
-        QueryWrapper<Property> queryWrapper = new QueryWrapper<Property>();
-
-        if(Strings.isNotEmpty(property.getPname())) {
-            queryWrapper.like("tb_property.pname", property.getPname());
-        }
-        if(Strings.isNotEmpty(property.getRemark())) {
-            queryWrapper.like("tb_property.remark", property.getRemark());
-        }
-        if(property.getType() != null) {
-            queryWrapper.like("tb_property.type", property.getType());
-        }
-
         IPage<PropertyListDto> page = new Page(currentPage,pageSize);
+        QueryWrapper<Property> queryWrapper = new QueryWrapper<Property>();
+        if(Strings.isNotEmpty(property.getPname())){
+            queryWrapper.like("tb_property.pname",property.getPname());
+        }
+
+        if(property.getType() != null) {
+            queryWrapper.eq("tb_property.type", property.getType());
+        }
+        if(property.getType2() != null){
+            queryWrapper.eq("tb_property.type2",property.getType2());
+        }
+
+
         page = propertyMapper.selectProMyPage(page, queryWrapper);
         return page;
     }

@@ -18,7 +18,7 @@ public class PropertyController {
 
     //分页查询带参数
     @GetMapping("/{currentPage}/{pageSize}")
-    public R getProByPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, Property property){
+    public R getProByPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize,@RequestBody Property property){
 
         return new R(true,iPropertyService.getProMyPage(currentPage,pageSize,property));
     }
@@ -74,7 +74,7 @@ public class PropertyController {
                 return new R(true,iPropertyService.subNum(pro.getPid(),property.getNumber()));
             }
         }else{
-            return new R(true,"仓库中不存在此物品，请检查");
+            return new R(true,20000,"仓库中不存在此物品，请检查");
         }
     }
 
