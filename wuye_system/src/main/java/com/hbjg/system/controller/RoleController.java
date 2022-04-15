@@ -18,21 +18,21 @@ public class RoleController {
 
     @GetMapping
     public R getAll(){
-        return new R(true,iRoleService.list());
+        return new R(true,20000,iRoleService.list());
     }
 
     @PostMapping
     public R save(@RequestBody Role role){
-        return new R(true,iRoleService.save(role));
+        return new R(true,20000,iRoleService.save(role));
     }
 
     @PutMapping
     public R update(@RequestBody Role role){
-        return new R(true,iRoleService.updateById(role));
+        return new R(true,20000,iRoleService.updateById(role));
     }
 
     @DeleteMapping("/{id}")
     public R delete(@PathVariable Integer id){
-        return new R(true,iRoleService.removeById(id));
+        return new R(true,20000,iRoleService.removeById(id));
     }
 }

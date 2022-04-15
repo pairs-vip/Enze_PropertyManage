@@ -20,22 +20,22 @@ public class PurchaselogController {
     //添加采购纪录
     @PostMapping
     public R savePurchaselog(@RequestBody Purchaselog purchaselog){
-        return new R(true,iPurchaselogService.save(purchaselog));
+        return new R(true,20000,iPurchaselogService.save(purchaselog));
     }
 
     //查询纪录
-    @GetMapping("/{currentPage}/{pageSize}")
+    @PostMapping("/{currentPage}/{pageSize}")
     public R getPurchaselogMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,@RequestBody Condition condition){
-        return new R(true,iPurchaselogService.selectPurlogMyPage(currentPage,pageSize,condition));
+        return new R(true,20000,iPurchaselogService.selectPurlogMyPage(currentPage,pageSize,condition));
     }
     //修改采购信息
     @PutMapping
     public R updatePurchaselog(@RequestBody Purchaselog purchaselog){
-        return new R(true,iPurchaselogService.updateById(purchaselog));
+        return new R(true,20000,iPurchaselogService.updateById(purchaselog));
     }
     //删除采购信息
     @DeleteMapping("/{id}")
     public R deletePurchaselog(@PathVariable Integer id){
-        return new R(true,iPurchaselogService.removeById(id));
+        return new R(true,20000,iPurchaselogService.removeById(id));
     }
 }

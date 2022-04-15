@@ -21,14 +21,14 @@ public class DeliverylogController {
     //分页查询出库纪录
     //currentPage为当前页码，pageSize为每页显示数
     //Delivertylog类对象中自动装填参数通过json发送过来 json的键要和实体类属性名对应
-    @GetMapping("/{currentPage}/{pageSize}")
+    @PostMapping("/{currentPage}/{pageSize}")
     public R getDlogMyPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, @RequestBody Condition condition){
-        return new R(true,iDeliverylogService.selectDlogMyPage(currentPage,pageSize,condition));
+        return new R(true,20000,iDeliverylogService.selectDlogMyPage(currentPage,pageSize,condition));
     }
 
     //新增添加出库纪录
     @PostMapping
     public R saveDlog(@RequestBody Deliverylog deliverylog){
-        return new R(true,iDeliverylogService.save(deliverylog));
+        return new R(true,20000,iDeliverylogService.save(deliverylog));
     }
 }

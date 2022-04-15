@@ -26,13 +26,13 @@ public class DeliverylogServiceImpl extends ServiceImpl<DeliverylogMapper, Deliv
         IPage<DeliverylogListDto> page = new Page<>(currentPage,pageSize);
         QueryWrapper<DeliverylogListDto> queryWrapper = new QueryWrapper<>();
         if(Strings.isNotEmpty(condition.getPropertyName())) {
-            queryWrapper.like("tb_property.pname", condition.getPropertyName());
+            queryWrapper.like("tb_deliverylog.pname", condition.getPropertyName());
         }
         if(Strings.isNotEmpty(condition.getBegin())){
-            queryWrapper.ge("tb_deliverylog.deliveryDate",condition.getBegin());
+            queryWrapper.ge("tb_deliverylog.delivery_date",condition.getBegin());
         }
         if(Strings.isNotEmpty(condition.getEnd())){
-            queryWrapper.le("tb_deliverylog.deliveryDate",condition.getEnd());
+            queryWrapper.le("tb_deliverylog.delivery_date",condition.getEnd());
         }
         page = deliverylogMapper.selectDlogMyPage(page, queryWrapper);
         return page;

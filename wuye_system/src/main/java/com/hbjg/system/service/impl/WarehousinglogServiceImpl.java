@@ -26,13 +26,13 @@ public class WarehousinglogServiceImpl extends ServiceImpl<WarehousinglogMapper,
         IPage<WarehousinglogListDto> page = new Page<>(currentPage,pageSize);
         QueryWrapper<WarehousinglogListDto> queryWrapper = new QueryWrapper<>();
         if(Strings.isNotEmpty(condition.getPropertyName())){
-            queryWrapper.like("tb_property.pname",condition.getPropertyName());
+            queryWrapper.like("tb_warehousinglog.pname",condition.getPropertyName());
         }
         if(Strings.isNotEmpty(condition.getBegin())){
-            queryWrapper.ge("tb_warehousinglog.warehousingDate",condition.getBegin());
+            queryWrapper.ge("tb_warehousinglog.warehousing_date",condition.getBegin());
         }
         if(Strings.isNotEmpty(condition.getEnd())){
-            queryWrapper.le("tb_warehousinglog.warehousingDate",condition.getEnd());
+            queryWrapper.le("tb_warehousinglog.warehousing_date",condition.getEnd());
         }
         page = warehousinglogMapper.selectWlogMyPage(page,queryWrapper);
         return page;

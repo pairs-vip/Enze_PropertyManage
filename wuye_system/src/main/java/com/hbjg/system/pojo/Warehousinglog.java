@@ -3,7 +3,7 @@ package com.hbjg.system.pojo;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Data
 public class Warehousinglog {
@@ -11,7 +11,7 @@ public class Warehousinglog {
     @TableId(value = "wlid")
     private Integer wlid;
     private Integer name;
-    private Integer pname;
+    private String pname;
     private String spec;
     private Integer number;
     private Integer type;

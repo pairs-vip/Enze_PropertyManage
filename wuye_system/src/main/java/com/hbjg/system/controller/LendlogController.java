@@ -20,9 +20,9 @@ public class LendlogController {
     private ILendlogService iLendlogService;
 
     //查看所有借出纪录分页
-    @GetMapping("/{currentPage}/{pageSize}")
+    @PostMapping("/{currentPage}/{pageSize}")
     public R getLendlogMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,@RequestBody  Condition condition){
-        return new R(true,iLendlogService.getLendlogMyPage(currentPage,pageSize,condition));
+        return new R(true,20000,iLendlogService.getLendlogMyPage(currentPage,pageSize,condition));
     }
 
     //将未同意改为已同意

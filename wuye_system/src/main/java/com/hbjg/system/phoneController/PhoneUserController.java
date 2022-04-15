@@ -20,10 +20,10 @@ public class PhoneUserController {
     private IUserService iUserService;
 
     //查询所有
-//    @GetMapping()
-//    public R getAll(){
-//        return new R(true,iUserService.list());
-//    }
+    @GetMapping()
+    public R getAll(){
+        return new R(true,iUserService.list());
+    }
 
     //根据username和password查询
     //登录

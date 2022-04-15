@@ -8,18 +8,17 @@
         SELECT
             tb_warehousinglog.wlid,
             tb_user.NAME,
-            tb_property.pname,
+            tb_warehousinglog.pname,
             tb_warehousinglog.spec,
             tb_warehousinglog.number,
             tb_type.tname,
             tb_type2.t2name,
-            tb_warehousinglog.warehousingDate,
-            tb_warehousinglog.imgSrc,
+            tb_warehousinglog.warehousing_date,
+            tb_warehousinglog.img_src,
             tb_warehousinglog.remark
         FROM
             tb_warehousinglog
             LEFT JOIN tb_user ON tb_warehousinglog.NAME = tb_user.uid
-            LEFT JOIN tb_property ON tb_warehousinglog.pname = tb_property.pid
             LEFT JOIN tb_type ON tb_warehousinglog.type = tb_type.tid
             LEFT JOIN tb_type2 ON tb_warehousinglog.type2 = tb_type2.t2id
 	    ${ew.customSqlSegment}

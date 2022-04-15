@@ -1,4 +1,4 @@
-package com.hbjg.system.controller;
+package com.hbjg.system.phoneController;
 
 import com.hbjg.system.controller.utils.R;
 import com.hbjg.system.pojo.Type;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/types")
-public class TypeController {
+@RequestMapping("/phonetypes")
+public class PhoneTypeController {
 
     @Autowired
     private ITypeService iTypeService;

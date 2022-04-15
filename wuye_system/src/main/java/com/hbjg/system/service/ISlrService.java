@@ -16,7 +16,9 @@ public interface ISlrService extends IService<Slr> {
 
     Slr selectByUidAndPid(Integer uid,Integer pid);
 
+    //借出
     Boolean AddNumByUidAndPid(Lendlog lendlog);
 
-    Boolean SubNumByUidAndPid(Lendlog lendlog);
+    //归还
+    Boolean SubNumByUidAndPid(Returnlog returnlog);
 }

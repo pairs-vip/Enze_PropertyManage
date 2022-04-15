@@ -8,18 +8,17 @@
         SELECT
             tb_deliverylog.dlid,
             tb_user.NAME,
-            tb_property.pname,
+            tb_deliverylog.pname,
             tb_deliverylog.spec,
             tb_deliverylog.number,
             tb_type.tname,
             tb_type2.t2name,
-            tb_deliverylog.deliveryDate,
-            tb_deliverylog.imgSrc,
+            tb_deliverylog.delivery_date,
+            tb_deliverylog.img_src,
             tb_deliverylog.remark
         FROM
             tb_deliverylog
             LEFT JOIN tb_user ON tb_deliverylog.NAME = tb_user.uid
-            LEFT JOIN tb_property ON tb_deliverylog.pname = tb_property.pid
             LEFT JOIN tb_type ON tb_deliverylog.type = tb_type.tid
             LEFT JOIN tb_type2 ON tb_deliverylog.type2 = tb_type2.t2id
 	    ${ew.customSqlSegment}

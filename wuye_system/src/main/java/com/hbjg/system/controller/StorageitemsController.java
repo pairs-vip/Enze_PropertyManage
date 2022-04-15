@@ -18,22 +18,22 @@ public class StorageitemsController {
 
     @GetMapping
     public R getAll(){
-        return new R(true,iStorageitemsService.list());
+        return new R(true,20000,iStorageitemsService.list());
     }
 
     @PostMapping
     public R save(@RequestBody Storageitems storageitems){
-        return new R(true,iStorageitemsService.save(storageitems));
+        return new R(true,20000,iStorageitemsService.save(storageitems));
     }
 
     @PutMapping
     public R update(@RequestBody Storageitems storageitems){
-        return new R(true,iStorageitemsService.updateById(storageitems));
+        return new R(true,20000,iStorageitemsService.updateById(storageitems));
     }
 
 
     @DeleteMapping("/{id}")
     public R delete(@PathVariable Integer id){
-        return new R(true,iStorageitemsService.removeById(id));
+        return new R(true,20000,iStorageitemsService.removeById(id));
     }
 }

@@ -42,12 +42,12 @@ public class PhoneReturnlogController {
 
 
     //通过当前用户查看，将已同意或未同意用作参数传递过来
-    @GetMapping("/getforuser1/{currentPage}/{pageSize}")
+    @PostMapping("/getforuser1/{currentPage}/{pageSize}")
     public R getLendForUser1(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Returnlog returnlog){
         return new R(true,iReturnlogService.getReturnlogForUser1(currentPage,pageSize,returnlog,session));
     }
     //通过当前用户查看，查询审核人是自己的纪录
-    @GetMapping("/getforuser2/{currentPage}/{pageSize}")
+    @PostMapping("/getforuser2/{currentPage}/{pageSize}")
     public R getLendForUser2(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Returnlog returnlog) {
         return new R(true, iReturnlogService.getReturnlogForUser2(currentPage, pageSize, returnlog, session));
     }

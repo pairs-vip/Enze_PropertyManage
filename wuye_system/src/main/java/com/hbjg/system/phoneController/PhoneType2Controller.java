@@ -1,8 +1,7 @@
-package com.hbjg.system.controller;
+package com.hbjg.system.phoneController;
 
 
 import com.hbjg.system.controller.utils.R;
-import com.hbjg.system.pojo.Type;
 import com.hbjg.system.pojo.Type2;
 import com.hbjg.system.service.IType2Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/type2s")
-public class Type2Controller {
+@RequestMapping("/phonetype2s")
+public class PhoneType2Controller {
 
     @Autowired
     private IType2Service iType2Service;

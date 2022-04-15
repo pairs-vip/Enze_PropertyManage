@@ -3,7 +3,7 @@ package com.hbjg.system.pojo;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
-import java.sql.Date;
+import java.util.Date;
 
 
 @Data

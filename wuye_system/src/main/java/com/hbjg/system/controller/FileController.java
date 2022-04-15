@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.pojo.ImgSrc;
+import com.hbjg.system.pojo.Property;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -111,7 +113,9 @@ public class FileController {
 			}
 
 		}
-		return new R(true,saveUrl,"图片上传成功");
+		System.out.println(saveUrl);
+		ImgSrc imgSrc = new ImgSrc(saveUrl);
+		return new R(true,imgSrc,"图片上传成功");
 	}
 	/**
 	 * 功能描述: 删除文件
@@ -124,7 +128,7 @@ public class FileController {
 		//获取当前项目所在绝对路径
 		String absolutePath = System.getProperty("user.dir");
 		//当前项目名称，可以自定义
-		String projectName = "/estate-management";
+		String projectName = "/";
 		//文件上传后所在绝对路径
 		String savePath = absolutePath+projectName+"/src/main/resources/static/fileupload/";
 		File file = new File(savePath+name);

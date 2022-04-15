@@ -88,10 +88,10 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
 
     //进行汇总表得归还修改，如果归还之后这条纪录为0，则删除。
     @Override
-    public Boolean SubNumByUidAndPid(Lendlog lendlog) {
-        Integer uid = lendlog.getUid1();
-        Integer pid = lendlog.getPid();
-        Integer number = lendlog.getNumber();
+    public Boolean SubNumByUidAndPid(Returnlog returnlog) {
+        Integer uid = returnlog.getUid1();
+        Integer pid = returnlog.getPid();
+        Integer number = returnlog.getNumber();
         Boolean aBoolean = slrMapper.SubNumByUidAndPid(uid, pid, number);
         Slr slr = slrMapper.selectByUidAndPid(uid, pid);
         slrMapper.deleteById(slr.getSlrid());

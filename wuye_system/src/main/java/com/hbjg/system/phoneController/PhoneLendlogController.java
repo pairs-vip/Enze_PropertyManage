@@ -40,12 +40,12 @@ public class PhoneLendlogController {
         return new R(true,iLendlogService.updateById(lendlog));
     }
     //通过当前用户查看,查看当前登录用户的借出纪录
-    @GetMapping("/getforuser1/{currentPage}/{pageSize}")
+    @PostMapping("/getforuser1/{currentPage}/{pageSize}")
     public R getLendForUser1(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Lendlog lendlog){
         return new R(true,iLendlogService.getLendForUser1(currentPage,pageSize,lendlog,session));
     }
     //通过当前用户查看,查看以自己为审核人的借出纪录
-    @GetMapping("/getforuser2/{currentPage}/{pageSize}")
+    @PostMapping("/getforuser2/{currentPage}/{pageSize}")
     public R getLendForUser2(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Lendlog lendlog){
         return new R(true,iLendlogService.getLendForUser2(currentPage,pageSize,lendlog,session));
     }

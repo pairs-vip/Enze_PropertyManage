@@ -18,21 +18,21 @@ public class DepartmentController {
 
     @GetMapping
     public R getAll(){
-        return new R(true,iDepartmentService.list());
+        return new R(true,20000,iDepartmentService.list());
     }
 
     @PostMapping
     public R save(@RequestBody Department department){
-        return new R(true,iDepartmentService.save(department));
+        return new R(true,20000,iDepartmentService.save(department));
     }
 
     @PutMapping
     public R update(@RequestBody Department department){
-        return new R(true,iDepartmentService.updateById(department));
+        return new R(true,20000,iDepartmentService.updateById(department));
     }
 
     @DeleteMapping("/{id}")
     public R delete(@PathVariable Integer id){
-        return new R(true,iDepartmentService.removeById(id));
+        return new R(true,20000,iDepartmentService.removeById(id));
     }
 }

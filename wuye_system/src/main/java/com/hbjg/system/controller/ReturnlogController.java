@@ -20,9 +20,9 @@ public class ReturnlogController {
     private IReturnlogService iReturnlogService;
 
     //查看所有归还纪录分页
-    @GetMapping("/{currentPage}/{pageSize}")
+    @PostMapping("/{currentPage}/{pageSize}")
     public R getReturnlogMyPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, @RequestBody Condition condition){
-        return new R(true,iReturnlogService.getReturnlogMyPage(currentPage,pageSize,condition));
+        return new R(true,20000,iReturnlogService.getReturnlogMyPage(currentPage,pageSize,condition));
     }
 
     //修改审核状态进行审核

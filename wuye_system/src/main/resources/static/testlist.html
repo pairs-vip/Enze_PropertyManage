@@ -18,16 +18,8 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-<div class="x-nav">
-            <span class="layui-breadcrumb">
-              <a><cite>首页</cite></a>
-              <a><cite>小区管理</cite></a>
-              <a><cite>小区列表</cite></a>
-            </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
-</div>
 <div class="x-body" id="app">
-    <div>
+    <!--<div>
         <span class="demonstration">时间范围</span>
         <el-date-picker
                 @change="dateChange"
@@ -42,17 +34,17 @@
         <el-input v-model="searchMap.name" style="width: 20%" placeholder="请输入小区名称"></el-input>
         <el-button type="primary" plain @click="searchMap.pageNum=1;search()">搜索</el-button>
     </div>
-    <br>
-    <xblock>
+    <br>-->
+<!--    <xblock>
         <button class="layui-btn layui-btn-danger" @click="delAll()"><i class="layui-icon">&#xe640;</i>批量删除</button>
-        <button class="layui-btn" @click="admin_add('添加','communityadd.html','1000','600')"><i class="layui-icon">&#xe608;</i>添加</button>
-        <!-- <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge">2</span> 条</span> -->
-    </xblock>
-    <table class="layui-table">
+        <button class="layui-btn" @click="admin_add('添加','propertyadd.html','1000','600')"><i class="layui-icon">&#xe608;</i>添加</button>
+        &lt;!&ndash; <span class="x-right" style="line-height:40px">共有数据：<span class="layui-badge">2</span> 条</span> &ndash;&gt;
+    </xblock>-->
+    <!--<table class="layui-table">
         <thead>
         <tr>
             <th>
-                <input type="checkbox" id="allChecked" :checked="checkedIDs.length===communityList.length" @click="allChecked">
+                <input type="checkbox" id="allChecked" :checked="checkedIDs.length===propertyList.length" @click="allChecked">
             </th>
             <th>
                 ID
@@ -100,47 +92,29 @@
         </tr>
         </thead>
         <tbody id="x-img">
-        <tr v-for="(community,index) in communityList">
-            <td>
-                <input type="checkbox" :id="'id'+community.id" :value="community.id" v-model="checkedIDs">
-            </td>
-            <td>{{community.id}}</td>
-            <td>{{community.code}}</td>
-            <td>{{community.name}}</td>
-            <td>{{community.address}}</td>
-            <td>{{community.area}}</td>
-            <td>{{community.totalBuildings}}</td>
-            <td>{{community.totalHouseholds}}</td>
-            <td>{{community.greeningRate}}</td>
-            <td>
-                <img :src="urlImg(community.thumbnail)" width="50" height="30" alt="">
-            </td>
-            <td>{{community.developer}}</td>
-            <td>{{community.estateCompany}}</td>
-            <td>{{dateFormat(community.createTime)}}</td>
-            <td class="td-status">
-                <span :class="community.status == 0?'layui-btn layui-btn-normal':'layui-btn layui-btn-disabled'">
-                    {{community.status == 0?'启用':'停用'}}
-                </span>
-            </td>
+        <tr v-for="(property,index) in propertyList">
             <td class="td-manage">
-                <a style="text-decoration:none" @click="community.status == 0?admin_stop(community.id):admin_start(community.id)" href="javascript:;" :title="community.status == 0?'停用':'启用'">
-                    <i class="layui-icon" v-if="community.status == 0">&#xe601;</i>
-                    <i class="layui-icon" v-if="community.status == 1">&#xe62f;</i>
-                </a>
-                <a title="编辑" href="javascript:;" @click="community_edit('编辑','communityadd.html',community.id,'1000','600')"
+                &lt;!&ndash;<a style="text-decoration:none" @click="property.status == 0?admin_stop(property.id):admin_start(property.id)" href="javascript:;" :title="property.status == 0?'停用':'启用'">
+                    <i class="layui-icon" v-if="property.status == 0">&#xe601;</i>
+                    <i class="layui-icon" v-if="property.status == 1">&#xe62f;</i>
+                </a>&ndash;&gt;
+                <a title="编辑" href="javascript:;" @click="property_edit('编辑','testadd.html',2,'1000','600')"
                    class="ml-5" style="text-decoration:none">
                     <i class="layui-icon">&#xe642;</i>
                 </a>
-                <a title="删除" href="javascript:;" @click="del_one(community.id)"
+                <a title="删除" href="javascript:;" @click="del_one(property.id)"
                    style="text-decoration:none">
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
         </tr>
         </tbody>
-    </table>
-    <el-pagination
+    </table>-->
+    <a title="编辑" href="javascript:;" @click="property_edit('编辑','testadd.html',2,'1000','600')"
+       class="ml-5" style="text-decoration:none">
+        <i class="layui-icon">&#xe642;</i>
+    </a>
+    <!--<el-pagination
             background
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -149,7 +123,7 @@
             :page-sizes="[2,5,10,20]"
             style="text-align: right;"
             :total="total">
-    </el-pagination>
+    </el-pagination>-->
 </div>
 <script src="/lib/layui/layui.js" charset="utf-8"></script>
 <!--js脚本一般是放在页面尾部-->
@@ -167,7 +141,7 @@
         el:"#app",//声明当前Vue在页面的作用域
         data:{
             checkedIDs:[],
-            communityList:[],
+            propertyList:[],
             total:10,
             searchMap:{"startTime":"","endTime":"","name":"","pageNum":1,"pageSize":2},
             selectDate:['',''],
@@ -201,19 +175,18 @@
         },
         methods:{
 
-            urlImg(url){
+            /*urlImg(url){
                 return "http://localhost/estate"+url;
                 // return "http://localhost:8888"+url;
             },
-            //分页条件查询小区列表
+            //分页条件查询小区列表*/
             search(){
                 //console.log(this.searchMap.name);
-                axios.post("/community/search",this.searchMap).then((res)=>{
-                    app.communityList = res.data.data;
-                    app.total = res.data.total;
+                axios.post("/property/1/10").then((res)=>{
+                    app.propertyList = res.data.data;
                 });
             },
-            //单个删除
+            /*//单个删除
             del_one(id){
                 this.$confirm('请问您是否要删除该小区信息?', '提示', {
                     confirmButtonText: '确定',
@@ -223,7 +196,7 @@
                     //把选中的ID封装到集合中
                     this.checkedIDs.push(id);
                     //执行删除操作
-                    axios.post("/community/del",this.checkedIDs).then((res)=>{
+                    axios.post("/property/del",this.checkedIDs).then((res)=>{
                         if(res.data.flag){
                             this.$message({
                                 type: 'success',
@@ -252,7 +225,7 @@
                     type: 'warning'
                 }).then(() => {
                     //执行删除操作
-                    axios.post("/community/del",this.checkedIDs).then((res)=>{
+                    axios.post("/property/del",this.checkedIDs).then((res)=>{
                         if(res.data.flag){
                             this.$message({
                                 type: 'success',
@@ -274,14 +247,14 @@
             },
             //全选、全不选方法
             allChecked: function () {
-                if (this.checkedIDs.length === this.communityList.length) {
+                if (this.checkedIDs.length === this.propertyList.length) {
                     // 全不选
                     this.checkedIDs = [];
 
                 } else {
                     this.checkedIDs = [];
                     // 全选
-                    this.communityList.forEach( (item) =>{
+                    this.propertyList.forEach( (item) =>{
                         this.checkedIDs.push(item.id); // 与checkbox的value统一
                     })
                 }
@@ -323,15 +296,15 @@
                 }
                 return moment(date).format(format);
             },
-            /*添加*/
+            /!*添加*!/
             admin_add(title,url,w,h){
                 this.x_admin_show(title,url,w,h);
-            },
+            },*/
             /*停用*/
             admin_stop(id){
                 layer.confirm('确认要停用吗？',function(index){
                     //往后台发送请求，把当前小区状态修改为”停用“
-                    axios.get("/community/updateStatus/1/"+id).then((res)=>{
+                    axios.get("/property/updateStatus/1/"+id).then((res)=>{
                         if(res.data.flag){
                             layer.msg('已停用!',{icon: 5,time:1000});
                         }
@@ -344,7 +317,7 @@
             admin_start(id){
                 layer.confirm('确认要启用吗？',function(index){
                     //往后台发送请求，把当前小区状态修改为”启用“
-                    axios.get("/community/updateStatus/0/"+id).then((res)=>{
+                    axios.get("/property/updateStatus/0/"+id).then((res)=>{
                         if(res.data.flag){
                             layer.msg('已启用!',{icon: 6,time:1000});
                         }
@@ -354,8 +327,8 @@
                 });
             },
             //编辑
-            community_edit (title,url,id,w,h) {
-                url = url+"?id="+id;
+            property_edit (title,url,id,w,h) {
+                // url = url+"?id="+id;
                 this.x_admin_show(title,url,w,h);
             },
             /*弹出层*/

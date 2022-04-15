@@ -42,16 +42,16 @@ public class UserController {
         if(user!=null){
             //将当前登录用户存到session中
             session.setAttribute("user",user);
-            return new R(true,user);
+            return new R(true,20000,user);
         }else{
-            return new R(true,"用户不存在");
+            return new R(true,20000,"用户不存在");
         }
     }
     //注销操作
     @GetMapping("/exit")
     public R exit(HttpSession session){
         session.removeAttribute("user");
-        return new R(true,"退出成功");
+        return new R(true,20000,"退出成功");
     }
 
 
@@ -60,9 +60,9 @@ public class UserController {
     public R getOneByUsername(@PathVariable String UsernameOrId){
 
         if(UsernameOrId.matches(".*[a-zA-Z].*")){
-            return new R(true,iUserService.getByUsername(UsernameOrId));
+            return new R(true,20000,iUserService.getByUsername(UsernameOrId));
         }else{
-            return new R(true,iUserService.getById(UsernameOrId));
+            return new R(true,20000,iUserService.getById(UsernameOrId));
 
         }
     }
@@ -75,36 +75,36 @@ public class UserController {
     //添加操作
     @PostMapping
     public R save(@RequestBody User user){
-        return new R(iUserService.save(user));
+        return new R(true,20000,iUserService.save(user));
     }
 
     //修改职位
     @PutMapping("/updateRole/{uid}/{rid}")
     public R updateRole(@PathVariable Integer uid,@PathVariable Integer rid ){
-        return new R(iUserService.updateRole(uid,rid));
+        return new R(true,20000,iUserService.updateRole(uid,rid));
     }
 
     //更新操作
     @PutMapping
     public R update(@RequestBody User user){
-        return new R(iUserService.updateById(user));
+        return new R(true,20000,iUserService.updateById(user));
     }
 
     //根据id删除
     @DeleteMapping("/{id}")
     public R delete(@PathVariable Integer id){
-        return new R(iUserService.removeById(id));
+        return new R(true,20000,iUserService.removeById(id));
     }
 
     //分页查询，带条件，多表查询
-    @GetMapping("/{currentPage}/{pageSize}")
-    public R getMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,User user){
+    @PostMapping("/{currentPage}/{pageSize}")
+    public R getMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,@RequestBody User user){
 
         IPage<UserListDto> page = iUserService.getUserMyPage(currentPage,pageSize,user);
         if(currentPage > page.getPages()){
             page = iUserService.getUserMyPage((int)page.getPages(),pageSize,user);
         }
-        return new R(true,page);
+        return new R(true,20000,page);
     }
 
     //前端测试登录

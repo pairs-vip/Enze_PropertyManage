@@ -20,4 +20,9 @@ public class PropertyServiceTest {
 //        property.setType(2);
         iPropertyService.getProMyPage(2,2,property);
     }
+
+    @Test
+    public void test02(){
+        System.out.println(iPropertyService.getById(2));
+    }
 }
