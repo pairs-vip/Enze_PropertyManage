@@ -1,7 +1,7 @@
 package com.hbjg.system.phoneController;
 
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Type2;
 import com.hbjg.system.service.IType2Service;
 import org.springframework.beans.factory.annotation.Autowired;

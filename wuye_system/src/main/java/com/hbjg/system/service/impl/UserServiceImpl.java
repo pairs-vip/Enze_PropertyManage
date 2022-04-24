@@ -28,6 +28,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
+    public User getAdminByUsernameAndPwd(String username, String password) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("tb_user.username",username);
+        queryWrapper.eq("tb_user.password",password);
+        queryWrapper.in("tb_user.role","1","2","3");
+        User user = userMapper.findUserByUsernameAndPwdAndRole(queryWrapper);
+        return user;
+    }
+
+    @Override
     public User getByUsername(String username) {
         return userMapper.findUserByUsername(username);
     }
@@ -39,6 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return page;
     }
 
+    //查所有
     @Override
     public List<User> queryList() {
         return userMapper.selectList(null);
@@ -47,25 +58,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public IPage<UserListDto> getUserMyPage(Integer currentPage,Integer pageSize, User user){
 
+        //将条件封装到QueryWrapper中
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        if(Strings.isNotEmpty(user.getUsername())) {
-            queryWrapper.like("tb_user.username", user.getUsername());
+        if(user.getRole()!=null) {
+            queryWrapper.like("tb_user.role", user.getRole());
         }
-        if(Strings.isNotEmpty(user.getName())) {
-            queryWrapper.like("tb_user.name", user.getName());
+        if(user.getDepartment()!=null) {
+            queryWrapper.like("tb_user.department", user.getDepartment());
         }
-        if(Strings.isNotEmpty(user.getPhone())) {
-            queryWrapper.like("tb_user.phone", user.getPhone());
-        }
-
-//        lqw.like(Strings.isNotEmpty(user.getUsername()),User::getUsername,user.getUsername());
-//        lqw.like(Strings.isNotEmpty(user.getPhone()),User::getPhone,user.getPhone());
-//        lqw.like(Strings.isNotEmpty(user.getName()),User::getName,user.getName());
         IPage<UserListDto> page = new Page(currentPage,pageSize);
         page = userMapper.selectUserMyPage(page, queryWrapper);
         return page;
     }
 
+    //根据id修改职位
     @Override
     public Boolean updateRole(Integer uid, Integer rid) {
        return userMapper.updateRole(uid,rid);

@@ -1,7 +1,8 @@
 package com.hbjg.system.phoneController;
 
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.pojo.Lendlog;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Returnlog;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.service.IReturnlogService;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RestController
 @RequestMapping("/phonereturnlogs")
@@ -47,8 +49,20 @@ public class PhoneReturnlogController {
         return new R(true,iReturnlogService.getReturnlogForUser1(currentPage,pageSize,returnlog,session));
     }
     //通过当前用户查看，查询审核人是自己的纪录
-    @PostMapping("/getforuser2/{currentPage}/{pageSize}")
-    public R getLendForUser2(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Returnlog returnlog) {
-        return new R(true, iReturnlogService.getReturnlogForUser2(currentPage, pageSize, returnlog, session));
+//    @PostMapping("/getforuser2/{currentPage}/{pageSize}")
+//    public R getLendForUser2(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Returnlog returnlog) {
+//        return new R(true, iReturnlogService.getReturnlogForUser2(currentPage, pageSize, returnlog, session));
+//    }
+
+    @PostMapping("/savereturnlogs")
+    public R saveReturnlogs(@RequestBody List<Returnlog> returnlogs, HttpSession session){
+        User user = (User) session.getAttribute("user");
+        if(user!=null){
+            for (Returnlog returnlog : returnlogs) {
+                returnlog.setUid1(user.getUid());
+                iReturnlogService.save(returnlog);
+            }
+        }
+        return new R(true,20000,"归还纪录添加成功");
     }
 }

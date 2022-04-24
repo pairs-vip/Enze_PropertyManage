@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--编写映射文件-->
 <mapper namespace="com.hbjg.system.mapper.UserMapper">
+	<!--分页查询所有用户并封装到UserListDto实体类中，需要用到多表联查-->
     <select id="selectUserMyPage"
             resultType="com.hbjg.system.pojo.UserListDto">
-
         select
             tb_user.uid,
 	        tb_user.username,
@@ -21,6 +21,13 @@
 
     </select>
 
+	<!--根据账号密码查询用户-->
+	<select id="findUserByUsernameAndPwdAndRole" resultType="com.hbjg.system.pojo.User">
+		select * from tb_user
+		${ew.customSqlSegment}
+	</select>
+
+	<!--根据id更改角色-->
 	<update id="updateRole" parameterType="integer">
 		update
 			tb_user

@@ -1,14 +1,14 @@
 package com.hbjg.system.phoneController;
 
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.JwtUtil;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.User;
-import com.hbjg.system.pojo.UserListDto;
 import com.hbjg.system.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @RestController
@@ -31,12 +31,22 @@ public class PhoneUserController {
     public R login(@PathVariable String username, @PathVariable String password, HttpSession session){
         User user = iUserService.getUserByUsernameAndPwd(username, password);
         if(user!=null){
-            //将当前登录用户存到session中
-            session.setAttribute("user",user);
-            return new R(true,user);
-        }else{
-            return new R(true,"用户不存在");
+                //添加头像
+                user.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+                //登录成功，添加token
+                user.setToken(JwtUtil.createToken());
+                //将当前登录用户存到session中,然后返回给前端
+                session.setAttribute("user",user);
+                return new R(true,20000,user);
+            } else{
+            return new R(true,20000,"用户名或密码错误！");
         }
+    }
+    //验证token
+    @GetMapping("/checkToken")
+    public R checkToken(HttpServletRequest request){
+        String token = request.getHeader("token");
+        return new R(true,20000,JwtUtil.checkToken(token));
     }
     //注销操作
     @GetMapping("/exit")

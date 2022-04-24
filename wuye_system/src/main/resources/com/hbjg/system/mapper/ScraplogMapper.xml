@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.ScraplogMapper">
+    <!--分页查询报废纪录，需要用到多表联查-->
+    <select id="selectScrlogMyPage"
+            resultType="com.hbjg.system.pojo.ScraplogListDto">
+        select
+            tb_scraplog.id,
+            tb_user.username as userUsername,
+            tb_user.name as userName,
+            tb_property.pname as propertyName,
+            tb_scraplog.number,
+            tb_property.spec as propertySpec,
+            tb_scraplog.time,
+            tb_scraplog.remark
+	    from tb_scraplog
+	        left join tb_user on tb_scraplog.user_id = tb_user.uid
+	        left join tb_property on tb_scraplog.property_id = tb_property.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+
+</mapper>

@@ -1,7 +1,6 @@
 package com.hbjg.system.controller;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.*;
 import com.hbjg.system.service.IWarehousinglogService;
 import org.springframework.beans.factory.annotation.Autowired;

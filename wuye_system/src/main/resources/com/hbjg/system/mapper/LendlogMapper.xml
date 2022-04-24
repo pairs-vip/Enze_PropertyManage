@@ -14,7 +14,7 @@
             tb_lendlog.number,
             tb_property.spec,
             tb_lendlog.`status`,
-            tb_lendlog.imgSrc,
+            tb_lendlog.img_src,
             tb_lendlog.remark
         FROM
             tb_lendlog
@@ -37,7 +37,7 @@
             tb_lendlog.number,
             tb_property.spec,
             tb_lendlog.`status`,
-            tb_lendlog.imgSrc,
+            tb_lendlog.img_src,
             tb_lendlog.remark
         FROM
             tb_lendlog

@@ -1,8 +1,7 @@
 package com.hbjg.system.controller;
 
 
-import com.hbjg.system.controller.utils.R;
-import com.hbjg.system.pojo.Type;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Type2;
 import com.hbjg.system.service.IType2Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +40,7 @@ public class Type2Controller {
 
     //删除二级分类
     @DeleteMapping("/{id}")
-    public R deleteTyped(@PathVariable Integer id){
+    public R deleteType2(@PathVariable Integer id){
         return new R(true,20000,iType2Service.removeById(id));
     }
 }

@@ -1,10 +1,9 @@
 package com.hbjg.system.controller;
 
 
-import com.hbjg.system.controller.utils.R;
-import com.hbjg.system.pojo.Property;
+import com.hbjg.system.pojo.*;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.service.IPropertyService;
-import org.apache.ibatis.annotations.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,4 +83,40 @@ public class PropertyController {
         return new R(true,20000,iPropertyService.getById(id));
     }
 
+    //借出审核通过之后进行资产数量的修改
+    @PutMapping("/lendPro")
+    public R lendPro(@RequestBody Lendlog lendlog){
+        Integer pid = lendlog.getPid();
+        Integer number = lendlog.getNumber();
+        return new R(true,20000,iPropertyService.subNum(pid,number));
+    }
+    //归还审核通过之后进行资产数据量修改
+    @PutMapping("/ReturnPro")
+    public R ReturnPro(@RequestBody Returnlog returnlog){
+        Integer pid = returnlog.getPid();
+        Integer number = returnlog.getNumber();
+        return new R(true,20000,iPropertyService.addNum(pid,number));
+    }
+    //将资产拿去维修
+    @PutMapping("/repair")
+    public R repairPro(@RequestBody Repairlog repairlog){
+        Integer pid = repairlog.getPropertyId();
+        Integer number = repairlog.getNumber();
+        return new R(true,20000,iPropertyService.subNum(pid,number));
+    }
+    //维修完成
+    @PutMapping("/repaired")
+    public R repairedPro(@RequestBody Repairlog repairlog){
+        Integer pid = repairlog.getPropertyId();
+        Integer number = repairlog.getNumber();
+        return new R(true,20000,iPropertyService.addNum(pid,number));
+    }
+
+    //报废
+    @PutMapping("/scrap")
+    public R scrapPro(@RequestBody Scraplog scraplog){
+        Integer pid = scraplog.getPropertyId();
+        Integer number = scraplog.getNumber();
+        return new R(true,20000,iPropertyService.subNum(pid,number));
+    }
 }

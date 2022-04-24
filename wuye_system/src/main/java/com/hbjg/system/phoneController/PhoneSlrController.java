@@ -1,6 +1,6 @@
 package com.hbjg.system.phoneController;
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Condition;
 import com.hbjg.system.pojo.Lendlog;
 import com.hbjg.system.pojo.Returnlog;

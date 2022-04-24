@@ -13,9 +13,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.ImgSrc;
-import com.hbjg.system.pojo.Property;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;

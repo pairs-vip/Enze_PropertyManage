@@ -1,22 +1,18 @@
 package com.hbjg.system.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.JwtUtil;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.A;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
 import com.hbjg.system.service.IUserService;
-import com.sun.org.apache.xpath.internal.axes.PredicatedNodeTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 
 
 @CrossOrigin
@@ -31,21 +27,36 @@ public class UserController {
     //查询所有
     @GetMapping()
     public R getAll(){
-        return new R(true,iUserService.list());
+        return new R(true,20000,iUserService.list());
     }
 
     //根据username和password查询
-    //登录
+    //后台登录，只有管理员能登陆
     @GetMapping("/login/{username}/{password}")
     public R login(@PathVariable String username, @PathVariable String password, HttpSession session){
-        User user = iUserService.getUserByUsernameAndPwd(username, password);
-        if(user!=null){
-            //将当前登录用户存到session中
-            session.setAttribute("user",user);
-            return new R(true,20000,user);
+        User user1 = iUserService.getUserByUsernameAndPwd(username, password);
+        if(user1!=null){
+            User user = iUserService.getAdminByUsernameAndPwd(username, password);
+            if(user!=null){
+                //添加头像
+                user.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+                //登录成功，添加token
+                user.setToken(JwtUtil.createToken());
+                //将当前登录用户存到session中,然后返回给前端
+                session.setAttribute("user",user);
+                return new R(true,20000,user);
+            }else {
+                return new R(true,20000,"该用户不是管理员，不能登录后台管理系统!");
+            }
         }else{
-            return new R(true,20000,"用户不存在");
+            return new R(true,20000,"用户名或密码错误！");
         }
+    }
+    //验证token
+    @GetMapping("/checkToken")
+    public R checkToken(HttpServletRequest request){
+        String token = request.getHeader("token");
+        return new R(true,20000,JwtUtil.checkToken(token));
     }
     //注销操作
     @GetMapping("/exit")
@@ -55,16 +66,15 @@ public class UserController {
     }
 
 
-    //根据username或者id查询
-    @GetMapping("/{UsernameOrId}")
-    public R getOneByUsername(@PathVariable String UsernameOrId){
-
-        if(UsernameOrId.matches(".*[a-zA-Z].*")){
-            return new R(true,20000,iUserService.getByUsername(UsernameOrId));
-        }else{
-            return new R(true,20000,iUserService.getById(UsernameOrId));
-
-        }
+    //根据username查询
+    @GetMapping("/selectByUsername/{username}")
+    public R selectByUsername(@PathVariable String username){
+        return new R(true,20000,iUserService.getByUsername(username));
+    }
+    //根据id查询
+    @GetMapping("/selectById/{id}")
+    public R selectById(@PathVariable Integer id){
+        return new R(true,20000,iUserService.getById(id));
     }
       //分页查询
 //    @GetMapping("/getPage/{currentPage}/{pageSize}")

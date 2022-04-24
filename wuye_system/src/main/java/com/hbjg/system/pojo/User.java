@@ -1,6 +1,7 @@
 package com.hbjg.system.pojo;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
@@ -19,5 +20,9 @@ public class User {
     private Integer role;
     private Integer department;
     private Date joindate;
+    @TableField(exist = false)
+    private String token;
+    @TableField(exist = false)
+    private String Avatar;
 
 }

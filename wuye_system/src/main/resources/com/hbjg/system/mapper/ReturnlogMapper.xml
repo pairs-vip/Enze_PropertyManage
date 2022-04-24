@@ -14,7 +14,7 @@
             tb_returnlog.number,
             tb_property.spec,
             tb_returnlog.`status`,
-            tb_returnlog.imgSrc,
+            tb_returnlog.img_src,
             tb_returnlog.remark
         FROM
             tb_returnlog

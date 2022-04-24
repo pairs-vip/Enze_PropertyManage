@@ -6,10 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbjg.system.mapper.PropertyMapper;
-import com.hbjg.system.pojo.Property;
-import com.hbjg.system.pojo.PropertyListDto;
-import com.hbjg.system.pojo.User;
-import com.hbjg.system.pojo.UserListDto;
+import com.hbjg.system.pojo.*;
 import com.hbjg.system.service.IPropertyService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +68,5 @@ public class PropertyServiceImpl extends ServiceImpl<PropertyMapper, Property> i
     public Property getProByNameAndSpecAndType(String panme, String spec, Integer type, Integer type2) {
         return propertyMapper.selectProByNameAndSpecAndType(panme,spec,type,type2);
     }
-
 
 }

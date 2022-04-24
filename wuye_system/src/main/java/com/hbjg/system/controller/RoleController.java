@@ -1,7 +1,7 @@
 package com.hbjg.system.controller;
 
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Role;
 import com.hbjg.system.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

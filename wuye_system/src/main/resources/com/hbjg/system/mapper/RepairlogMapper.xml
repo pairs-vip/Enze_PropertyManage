@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.RepairlogMapper">
+    <!--分页查询所有用户并封装到UserListDto实体类中，需要用到多表联查-->
+    <select id="selectReplogMyPage"
+            resultType="com.hbjg.system.pojo.RepairlogListDto">
+        select
+            tb_repairlog.id,
+            tb_user.username as userUsername,
+            tb_user.name as userName,
+            tb_property.pname as propertyName,
+            tb_repairlog.number,
+            tb_property.spec as propertySpec,
+            tb_repairlog.status,
+            tb_repairlog.time,
+            tb_repairlog.remark
+	    from tb_repairlog
+	        left join tb_user on tb_repairlog.user_id = tb_user.uid
+	        left join tb_property on tb_repairlog.property_id = tb_property.pid
+	    ${ew.customSqlSegment}
+
+    </select>
+
+</mapper>

@@ -1,7 +1,7 @@
 package com.hbjg.system.controller;
 
 
-import com.hbjg.system.controller.utils.R;
+import com.hbjg.system.utils.R;
 import com.hbjg.system.pojo.Storageitems;
 import com.hbjg.system.service.IStorageitemsService;
 import org.springframework.beans.factory.annotation.Autowired;

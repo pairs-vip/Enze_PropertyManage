@@ -21,5 +21,11 @@ public interface UserMapper extends MyBaseMapper<User> {
 
 
     Boolean updateRole(Integer uid, Integer rid);
+
+    User findUserByUsernameAndPwdAndRole(@Param(Constants.WRAPPER) QueryWrapper<User> queryWrapper);
+
+    List<User> findAll();
+
+    User findById(Integer id);
 }
 
