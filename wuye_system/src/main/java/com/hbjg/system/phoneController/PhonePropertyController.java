@@ -20,13 +20,13 @@ public class PhonePropertyController {
     @PostMapping("/{currentPage}/{pageSize}")
     public R getProByPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize,@RequestBody Property property){
 
-        return new R(true,iPropertyService.getProMyPage(currentPage,pageSize,property));
+        return new R(true,20000,iPropertyService.getProMyPage(currentPage,pageSize,property));
     }
 
     //查询所有不分页
     @GetMapping
     public R getAll(){
-        return new R(true,iPropertyService.list());
+        return new R(true,20000,iPropertyService.list());
 
     }
 
@@ -50,32 +50,32 @@ public class PhonePropertyController {
 //    }
 
     //通过id删除物资
-    @DeleteMapping("/{id}")
-    public R delete(@PathVariable Integer id){
-        return new R(true,iPropertyService.removeById(id));
-    }
+//    @DeleteMapping("/{id}")
+//    public R delete(@PathVariable Integer id){
+//        return new R(true,20000,iPropertyService.removeById(id));
+//    }
 
 
     //根据id修改物资
-    @PutMapping
-    public R update(@RequestBody Property property){
-        return new R(true,iPropertyService.updateById(property));
-    }
+//    @PutMapping
+//    public R update(@RequestBody Property property){
+//        return new R(true,20000,iPropertyService.updateById(property));
+//    }
 
     //根据id出库物资
-    @PutMapping("/subpro")
-    public R subNum(@RequestBody Property property){
-        //根据名字和规格查看是否存在此物品
-        Property pro = iPropertyService.getProByNameAndSpec(property.getPname(), property.getSpec());
-        if(pro!=null){
-            if(pro.getNumber()<property.getNumber()){
-                return new R(true,"商品库存小于出库数量，请检查");
-            }else{
-                return new R(true,iPropertyService.subNum(pro.getPid(),property.getNumber()));
-            }
-        }else{
-            return new R(true,20000,"仓库中不存在此物品，请检查");
-        }
-    }
+//    @PutMapping("/subpro")
+//    public R subNum(@RequestBody Property property){
+//        //根据名字和规格查看是否存在此物品
+//        Property pro = iPropertyService.getProByNameAndSpec(property.getPname(), property.getSpec());
+//        if(pro!=null){
+//            if(pro.getNumber()<property.getNumber()){
+//                return new R(true,"商品库存小于出库数量，请检查");
+//            }else{
+//                return new R(true,iPropertyService.subNum(pro.getPid(),property.getNumber()));
+//            }
+//        }else{
+//            return new R(true,20000,"仓库中不存在此物品，请检查");
+//        }
+//    }
 
 }

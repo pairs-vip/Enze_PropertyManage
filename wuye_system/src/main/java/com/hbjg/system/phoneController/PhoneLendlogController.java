@@ -55,7 +55,7 @@ public class PhoneLendlogController {
     //通过当前用户查看,查看当前登录用户的借出纪录
     @PostMapping("/getforuser1/{currentPage}/{pageSize}")
     public R getLendForUser1(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Lendlog lendlog){
-        return new R(true,iLendlogService.getLendForUser1(currentPage,pageSize,lendlog,session));
+        return new R(true,20000,iLendlogService.getLendForUser1(currentPage,pageSize,lendlog,session));
     }
     //通过当前用户查看,查看以自己为审核人的借出纪录
 //    @PostMapping("/getforuser2/{currentPage}/{pageSize}")

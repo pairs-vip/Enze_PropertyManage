@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
+import com.hbjg.system.pojo.WeChatLoginModel;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface IUserService extends IService<User> {
     IPage<UserListDto> getUserMyPage(Integer currentPage,Integer pageSize,User user);
 
     Boolean updateRole(Integer uid, Integer rid);
+
+    //微信查看是否存在此用户
 
 }

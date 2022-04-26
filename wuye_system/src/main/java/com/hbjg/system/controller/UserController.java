@@ -41,7 +41,7 @@ public class UserController {
                 //添加头像
                 user.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
                 //登录成功，添加token
-                user.setToken(JwtUtil.createToken());
+                user.setToken(JwtUtil.createToken(username));
                 //将当前登录用户存到session中,然后返回给前端
                 session.setAttribute("user",user);
                 return new R(true,20000,user);

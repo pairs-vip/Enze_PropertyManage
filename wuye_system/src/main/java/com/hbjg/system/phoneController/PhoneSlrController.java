@@ -20,19 +20,19 @@ public class PhoneSlrController {
     //汇总表，查看当前登录用户未归还资产名称及数量
     @PostMapping("/{currentPage}/{pageSize}")
     public R getSlrMyPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize, @RequestBody Condition condition, HttpSession session){
-       return new R(true,iSlrService.selectSlrMyPageForUser(currentPage,pageSize,condition,session));
+       return new R(true,20000,iSlrService.selectSlrMyPageForUser(currentPage,pageSize,condition,session));
     }
 
     //每次借出通过审核就要进行修改汇总表
-    @PutMapping("/lend")
-    public R AddNumber(@RequestBody Lendlog lendlog){
-        return new R(true,iSlrService.AddNumByUidAndPid(lendlog));
-    }
+//    @PutMapping("/lend")
+//    public R AddNumber(@RequestBody Lendlog lendlog){
+//        return new R(true,iSlrService.AddNumByUidAndPid(lendlog));
+//    }
 
     //每次归还通过审核也要进行修改汇总表
-    @PutMapping("/return")
-    public R SubNumber(@RequestBody Returnlog returnlog){
-        return new R(true,iSlrService.SubNumByUidAndPid(returnlog));
-    }
+//    @PutMapping("/return")
+//    public R SubNumber(@RequestBody Returnlog returnlog){
+//        return new R(true,iSlrService.SubNumByUidAndPid(returnlog));
+//    }
 
 }

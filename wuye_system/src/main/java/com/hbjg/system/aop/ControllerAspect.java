@@ -48,8 +48,9 @@ public class ControllerAspect {
         Signature signature = proceedingJoinPoint.getSignature();
         Operationlog operationlog = new Operationlog();
         Object result = null;
+
         try {
-            if(target.getClass().getSimpleName().equals("OfficalWebController")){
+            if(target.getClass().getSimpleName().equals("OfficalWebController")) {
                 result = proceedingJoinPoint.proceed();
             }
             else if (signature.getName().equals("login")) {
@@ -163,13 +164,17 @@ public class ControllerAspect {
         return result;
     }
 
-    @Around("@within(org.springframework.stereotype.Controller)")
-    Object aroundController(ProceedingJoinPoint proceedingJoinPoint){
-        return runAndSaveLog(proceedingJoinPoint);
-    }
-    @Around("@within(org.springframework.web.bind.annotation.RestController)")
+//    @Around("@within(org.springframework.stereotype.Controller)")
+//    Object aroundController(ProceedingJoinPoint proceedingJoinPoint){
+//        return runAndSaveLog(proceedingJoinPoint);
+//    }
+//    @Around("@within(org.springframework.web.bind.annotation.RestController)")
+//    Object aroundRestController(ProceedingJoinPoint proceedingJoinPoint) {
+//        return runAndSaveLog(proceedingJoinPoint);
+//    }
+//    value="execution(* com.cxsw.spring.service.impl.*.*(..))
+    @Around(value="execution(* com.hbjg.system.controller.*.*(..))")
     Object aroundRestController(ProceedingJoinPoint proceedingJoinPoint) {
         return runAndSaveLog(proceedingJoinPoint);
     }
-
 }

@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbjg.system.mapper.UserMapper;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
+import com.hbjg.system.pojo.WeChatLoginModel;
 import com.hbjg.system.service.IUserService;
 import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,5 +78,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
        return userMapper.updateRole(uid,rid);
     }
 
+    //微信登录验证
 
 }
