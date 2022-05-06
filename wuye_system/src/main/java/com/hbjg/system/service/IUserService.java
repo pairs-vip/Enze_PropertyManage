@@ -24,6 +24,8 @@ public interface IUserService extends IService<User> {
 
     Boolean updateRole(Integer uid, Integer rid);
 
+    List<User> selectByRole(Integer rid);
+
     //微信查看是否存在此用户
 
 }

@@ -57,6 +57,7 @@ public class LendlogServiceImpl extends ServiceImpl<LendlogMapper, Lendlog> impl
 
         IPage<LendlogListDto> page = new Page<>(currentPage,pageSize);
         User user = (User)session.getAttribute("user");
+        System.out.println("session:"+user);
         QueryWrapper<Lendlog> queryWrapper = new QueryWrapper<Lendlog>();
 
         if(user!=null){

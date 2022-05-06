@@ -23,4 +23,6 @@ public interface SlrMapper extends MyBaseMapper<Slr> {
     Boolean SubNumByUidAndPid(Integer uid,Integer pid,Integer number);
 
     IPage<SlrListDto> selectSlrMyPage(IPage<SlrListDto> page,@Param(Constants.WRAPPER) QueryWrapper<Condition> queryWrapper);
+
+    List<Slr> selectSlrByUserId(Integer userId);
 }

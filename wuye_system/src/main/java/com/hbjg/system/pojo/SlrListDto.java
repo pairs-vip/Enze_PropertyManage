@@ -7,6 +7,7 @@ public class SlrListDto {
 
     private Integer slrid;
     private String name;
+    private String projectName;
     private String pname;
     private Integer number;
     private String spec;

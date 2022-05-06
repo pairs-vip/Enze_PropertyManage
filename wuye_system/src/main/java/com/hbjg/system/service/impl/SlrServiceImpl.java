@@ -83,7 +83,6 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
                 return false;
             }
         }
-
     }
 
     //进行汇总表得归还修改，如果归还之后这条纪录为0，则删除。
@@ -96,5 +95,14 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
         Slr slr = slrMapper.selectByUidAndPid(uid, pid);
         slrMapper.deleteById(slr.getSlrid());
         return aBoolean;
+    }
+
+    @Override
+    public Boolean selectSlrByUserId(Integer userId) {
+        List<Slr> slrs = slrMapper.selectSlrByUserId(userId);
+        if(slrs.isEmpty()){
+            return false;
+        }
+        return true;
     }
 }

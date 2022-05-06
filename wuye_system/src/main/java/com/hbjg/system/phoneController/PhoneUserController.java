@@ -36,29 +36,35 @@ public class PhoneUserController {
     @Autowired
     private IUserService iUserService;
 
-    //查询所有
-    @GetMapping()
+    //查询所有人
+    @GetMapping
     public R getAll(){
         return new R(true,20000,iUserService.list());
     }
 
+    //根据职位查询
+    @GetMapping("/getByRole/{rid}")
+    public R getByRole(@PathVariable Integer rid){
+        return new R(true,20000,iUserService.selectByRole(rid));
+    }
+
     //根据username和password查询
     //登录
-//    @GetMapping("/login/{username}/{password}")
-//    public R login(@PathVariable String username, @PathVariable String password, HttpSession session){
-//        User user = iUserService.getUserByUsernameAndPwd(username, password);
-//        if(user!=null){
-//                //添加头像
-//                user.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-//                //登录成功，添加token
-//                user.setToken(JwtUtil.createToken(username));
-//                //将当前登录用户存到session中,然后返回给前端
-//                session.setAttribute("user",user);
-//                return new R(true,20000,user);
-//            } else{
-//            return new R(true,20000,"用户名或密码错误！");
-//        }
-//    }
+    @GetMapping("/login/{username}/{password}")
+    public R login(@PathVariable String username, @PathVariable String password, HttpSession session){
+        User user = iUserService.getUserByUsernameAndPwd(username, password);
+        if(user!=null){
+                //添加头像
+                user.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+                //登录成功，添加token
+                user.setToken(JwtUtil.createToken(username));
+                //将当前登录用户存到session中,然后返回给前端
+                session.setAttribute("user",user);
+                return new R(true,20000,user);
+            } else{
+            return new R(true,20000,"用户名或密码错误！");
+        }
+    }
     //验证token
     @GetMapping("/checkToken")
     public R checkToken(HttpServletRequest request){
@@ -105,25 +111,37 @@ public class PhoneUserController {
         session_key = jsonObject.get("session_key")+"";
         openid = jsonObject.get("openid")+"";
         System.out.println("openid:"+openid);
-        User user = new User();
         if(openid!=null){
-            user = iUserService.getByUsername(openid);
+            User user = iUserService.getByUsername(openid);
+//            session.setAttribute("user",user);
+            //如果此openid在数据库中存在
+            if(user!=null){
+                user.setToken(JwtUtil.createToken(openid));
+                session.setAttribute("user",user);
+                User user11 = (User)session.getAttribute("user");
+                String id = session.getId();
+                System.out.println("sessionId:"+id);
+                System.out.println("session:"+user11);
+                R r = new R(true,20000,user,id);
+                System.out.println("r:"+r);
+                return new R(true,20000,user,id);
+            }else {
+                User user1 = new User();
+                user1.setUsername(openid);
+                user1.setRole(4);
+                Date date = new Date();
+                user1.setJoindate(date);
+                iUserService.save(user1);
+                User user2 = iUserService.getByUsername(openid);
+                user2.setToken(JwtUtil.createToken(user2.getUsername()));
+                session.setAttribute("user",user2);
+                User user3 = (User)session.getAttribute("user");
+                String id = session.getId();
+                System.out.println("session:"+user3);
+                return new R(true,20000,user2,id);
+            }
         }
-        //如果此openid在数据库中存在
-        if(user!=null){
-            user.setToken(JwtUtil.createToken(openid));
-            session.setAttribute("user",user);
-            return new R(true,20000,user);
-        }else {
-            User user1 = new User();
-            user1.setUsername(openid);
-            user1.setRole(4);
-            Date date = new Date();
-            user1.setJoindate(date);
-            user1.setToken(JwtUtil.createToken(openid));
-            iUserService.save(user1);
-            return new R(true,20000,iUserService.getByUsername(openid));
-        }
+        return new R(true,20000,"openid解析失败");
     }
 
 

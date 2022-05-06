@@ -4,7 +4,7 @@ package com.hbjg.system.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.hbjg.system.utils.JwtUtil;
 import com.hbjg.system.utils.R;
-import com.hbjg.system.pojo.A;
+import com.hbjg.system.pojo.ProjectListDto;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
 import com.hbjg.system.service.IUserService;
@@ -118,22 +118,22 @@ public class UserController {
     }
 
     //前端测试登录
-    @GetMapping("/doLogins")
-    public R loLogins(){
-        System.out.println("shoudao.........");
-        A a =new A();
-        a.setToken("admin");
-        return new R(true,20000,a);
-    }
+//    @GetMapping("/doLogins")
+//    public R loLogins(){
+//        System.out.println("shoudao.........");
+//        ProjectListDto a =new ProjectListDto();
+//        a.setToken("admin");
+//        return new R(true,20000,a);
+//    }
     //测试信息获取
-    @GetMapping("/getInfo")
-    public R getInfo(){
-        System.out.println("shoudao1 ................");
-        A a =new A();
-        a.setRoles("[admin]");
-        a.setIntroduction("I am a super administrator");
-        a.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-        a.setName("super admin");
-        return  new R(true,20000,a);
-    }
+//    @GetMapping("/getInfo")
+//    public R getInfo(){
+//        System.out.println("shoudao1 ................");
+//        ProjectListDto a =new ProjectListDto();
+//        a.setRoles("[admin]");
+//        a.setIntroduction("I am a super administrator");
+//        a.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+//        a.setName("super admin");
+//        return  new R(true,20000,a);
+//    }
 }

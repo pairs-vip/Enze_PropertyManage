@@ -78,6 +78,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
        return userMapper.updateRole(uid,rid);
     }
 
-    //微信登录验证
+    @Override
+    public List<User> selectByRole(Integer rid) {
+        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+        queryWrapper.eq("tb_user.role",rid);
+        return userMapper.selectList(queryWrapper);
+    }
+
 
 }

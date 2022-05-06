@@ -13,6 +13,7 @@ public class LendlogListDto {
     @TableId(value = "llid")
     private Integer llid;
     private String borrower;
+    private Integer pid;
     private String pname;
     private String reviewer;
     private Integer number;

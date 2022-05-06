@@ -21,4 +21,7 @@ public interface ISlrService extends IService<Slr> {
 
     //归还
     Boolean SubNumByUidAndPid(Returnlog returnlog);
+
+    //查看此用户当前师否存在未归还的物品
+    Boolean selectSlrByUserId(Integer userId);
 }

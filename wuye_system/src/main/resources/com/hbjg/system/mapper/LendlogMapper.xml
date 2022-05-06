@@ -8,6 +8,7 @@
         SELECT
             tb_lendlog.llid,
             u1.username as borrower,
+            tb_lendlog.pid,
             tb_property.pname,
             u2.username as reviewer,
             tb_lendlog.time,

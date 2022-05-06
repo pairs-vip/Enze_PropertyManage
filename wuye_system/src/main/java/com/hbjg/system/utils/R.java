@@ -82,6 +82,13 @@ public class R {
         this.code = code;
     }
 
+    public R(Boolean flag,Integer code, Object data, String message) {
+        this.flag = flag;
+        this.data = data;
+        this.message = message;
+        this.code = code;
+    }
+
     @Override
     public String toString() {
         return "R{" +

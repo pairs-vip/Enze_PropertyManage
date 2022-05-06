@@ -15,6 +15,7 @@
 		 select
 			s.slrid,
 			u.name,
+			tb_project.name as projectName,
 			p.pname,
 			s.number,
 			p.spec
@@ -22,7 +23,17 @@
 			tb_slr s
 		left join tb_user u on s.uid = u.uid
 		left join tb_property p on s.pid = p.pid
+		left join tb_project on s.uid = tb_project.user_id
 		${ew.customSqlSegment}
+	</select>
+
+	<select id="selectSlrByUserId" parameterType="integer" resultType="com.hbjg.system.pojo.Slr">
+		select
+			*
+		from
+			tb_slr
+		where
+			uid = #{uid}
 	</select>
 
 	<update id="AddNumByUidAndPid" parameterType="integer">

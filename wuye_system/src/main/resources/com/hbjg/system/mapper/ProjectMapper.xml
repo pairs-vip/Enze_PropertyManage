@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--编写映射文件-->
+<mapper namespace="com.hbjg.system.mapper.ProjectMapper">
+    <select id="findAll"  resultType="com.hbjg.system.pojo.ProjectListDto">
+       select
+            tb_project.id,
+            tb_project.name,
+            tb_user.name as fuzeren
+	    from
+	        tb_project,tb_user
+        where
+            tb_project.user_id = tb_user.uid
+    </select>
+</mapper>
