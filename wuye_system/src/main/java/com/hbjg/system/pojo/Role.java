@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class Role {
 
-    @TableId(value = "rid")
-    private Integer rid;
-    private String rname;
+    @TableId(value = "id")
+    private Integer id;
+    private String name;
     private String power;
     private String description;
 

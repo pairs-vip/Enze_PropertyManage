@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class SlrListDto {
 
-    private Integer slrid;
-    private String name;
+    private Integer id;
+    private String userName;
     private String projectName;
-    private String pname;
-    private Integer number;
-    private String spec;
+    private String propertyName;
+    private Integer propertyNumber;
+    private String propertySpec;
 }

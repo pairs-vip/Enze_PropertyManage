@@ -34,14 +34,14 @@ public class PropertyController {
     //新增物资
     //新增时检测仓库中是否存在此物品
     @PostMapping("/addpro")
-    public R save(@RequestBody Property property){
-        Property pro = iPropertyService.getProByNameAndSpec(property.getPname(),property.getSpec());
+    public R warehousing(@RequestBody Property property){
+        Property pro = iPropertyService.getProByNameAndSpec(property.getName(),property.getSpec());
         if(pro==null){
             return new R(true,20000,iPropertyService.save(property));
         }else{
-            Property property1 = iPropertyService.getProByNameAndSpecAndType(property.getPname(),property.getSpec(),property.getType(),property.getType2());
+            Property property1 = iPropertyService.getProByNameAndSpecAndType(property.getName(),property.getSpec(),property.getTypeId(),property.getType2Id());
             if(property1!=null){
-                return new R(true,20000,iPropertyService.addNum(property1.getPid(),property.getNumber()));
+                return new R(true,20000,iPropertyService.addNum(property1.getId(),property.getNumber()));
             }else{
                 return new R(true,20000,"此物品已存在，请检查物品类型是否有问题！");
             }
@@ -64,14 +64,14 @@ public class PropertyController {
 
     //根据id出库物资
     @PutMapping("/subpro")
-    public R subNum(@RequestBody Property property){
+    public R delivery(@RequestBody Property property){
         //根据名字和规格查看是否存在此物品
-        Property pro = iPropertyService.getProByNameAndSpec(property.getPname(), property.getSpec());
+        Property pro = iPropertyService.getProByNameAndSpec(property.getName(), property.getSpec());
         if(pro!=null){
             if(pro.getNumber()<property.getNumber()){
                 return new R(true,20000,"商品库存小于出库数量，请检查");
             }else{
-                return new R(true,20000,iPropertyService.subNum(pro.getPid(),property.getNumber()));
+                return new R(true,20000,iPropertyService.subNum(pro.getId(),property.getNumber()));
             }
         }else{
             return new R(true,20000,"仓库中不存在此物品，请检查");
@@ -86,15 +86,15 @@ public class PropertyController {
     //借出审核通过之后进行资产数量的修改
     @PutMapping("/lendPro")
     public R lendPro(@RequestBody Lendlog lendlog){
-        Integer pid = lendlog.getPid();
-        Integer number = lendlog.getNumber();
+        Integer pid = lendlog.getPropertyId();
+        Integer number = lendlog.getPropertyNumber();
         return new R(true,20000,iPropertyService.subNum(pid,number));
     }
     //归还审核通过之后进行资产数据量修改
-    @PutMapping("/ReturnPro")
+    @PutMapping("/returnPro")
     public R ReturnPro(@RequestBody Returnlog returnlog){
-        Integer pid = returnlog.getPid();
-        Integer number = returnlog.getNumber();
+        Integer pid = returnlog.getPropertyId();
+        Integer number = returnlog.getPropertyNumber();
         return new R(true,20000,iPropertyService.addNum(pid,number));
     }
     //将资产拿去维修

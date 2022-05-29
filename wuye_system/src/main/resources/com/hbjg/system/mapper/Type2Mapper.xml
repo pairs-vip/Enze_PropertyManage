@@ -4,6 +4,6 @@
 <mapper namespace="com.hbjg.system.mapper.Type2Mapper">
     <select id="getT2ByT" parameterType="integer"
             resultType="com.hbjg.system.pojo.Type2">
-        select * from tb_type2 where tid=#{tid}
+        select * from tb_type2 where type_id=#{tid}
     </select>
 </mapper>

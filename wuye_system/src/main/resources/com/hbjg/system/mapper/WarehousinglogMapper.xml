@@ -6,21 +6,21 @@
             resultType="com.hbjg.system.pojo.WarehousinglogListDto">
 
         SELECT
-            tb_warehousinglog.wlid,
-            tb_user.NAME,
-            tb_warehousinglog.pname,
-            tb_warehousinglog.spec,
-            tb_warehousinglog.number,
-            tb_type.tname,
-            tb_type2.t2name,
-            tb_warehousinglog.warehousing_date,
+            tb_warehousinglog.id,
+            tb_user.name as userName,
+            tb_warehousinglog.property_name,
+            tb_warehousinglog.property_spec,
+            tb_warehousinglog.property_number,
+            tb_type.name as typeName,
+            tb_type2.name as type2Name,
+            tb_warehousinglog.time,
             tb_warehousinglog.img_src,
             tb_warehousinglog.remark
         FROM
             tb_warehousinglog
-            LEFT JOIN tb_user ON tb_warehousinglog.NAME = tb_user.uid
-            LEFT JOIN tb_type ON tb_warehousinglog.type = tb_type.tid
-            LEFT JOIN tb_type2 ON tb_warehousinglog.type2 = tb_type2.t2id
+            LEFT JOIN tb_user ON tb_warehousinglog.user_id = tb_user.id
+            LEFT JOIN tb_type ON tb_warehousinglog.type_id = tb_type.id
+            LEFT JOIN tb_type2 ON tb_warehousinglog.type2_id = tb_type2.id
 	    ${ew.customSqlSegment}
 
     </select>

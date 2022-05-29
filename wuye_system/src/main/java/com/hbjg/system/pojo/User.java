@@ -11,14 +11,14 @@ import java.util.Date;
 @Data
 public class User {
 
-    @TableId(value = "uid")
-    private Integer uid;
+    @TableId(value = "id")
+    private Integer id;
     private String username;
     private String password;
     private String name;
     private String phone;
-    private Integer role;
-    private Integer department;
+    private Integer roleId;
+    private Integer departmentId;
     private Date joindate;
     @TableField(exist = false)
     private String token;

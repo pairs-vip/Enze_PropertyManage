@@ -33,7 +33,7 @@ public class PhoneFileController {
 	 * @param file	上传文件的参数名，必须和前端参数名称一致
 	 * @param request	请求对象
 	 * @param response 	响应对象
-	 * @return : com.bitterminer.estatemanagement.common.R
+	 * @return R
 	 */
 	@RequestMapping(value="/fileupload")
 	public R uploads(@RequestParam("file")MultipartFile file, HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -114,7 +114,7 @@ public class PhoneFileController {
 	/**
 	 * 功能描述: 删除文件
 	 * @param fileName	文件名称参数，和前台传递的参数保持一致
-	 * @return : com.bitterminer.estatemanagement.common.R
+	 * @return R
 	 */
 	@RequestMapping(value="/delfile")
 	public R fileDel(@RequestParam String fileName){

@@ -76,11 +76,7 @@ public class UserController {
     public R selectById(@PathVariable Integer id){
         return new R(true,20000,iUserService.getById(id));
     }
-      //分页查询
-//    @GetMapping("/getPage/{currentPage}/{pageSize}")
-//    public R getByPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize){
-//        return new R(true,iUserService.getByPage(currentPage,pageSize));
-//    }
+
 
     //添加操作
     @PostMapping
@@ -117,23 +113,4 @@ public class UserController {
         return new R(true,20000,page);
     }
 
-    //前端测试登录
-//    @GetMapping("/doLogins")
-//    public R loLogins(){
-//        System.out.println("shoudao.........");
-//        ProjectListDto a =new ProjectListDto();
-//        a.setToken("admin");
-//        return new R(true,20000,a);
-//    }
-    //测试信息获取
-//    @GetMapping("/getInfo")
-//    public R getInfo(){
-//        System.out.println("shoudao1 ................");
-//        ProjectListDto a =new ProjectListDto();
-//        a.setRoles("[admin]");
-//        a.setIntroduction("I am a super administrator");
-//        a.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
-//        a.setName("super admin");
-//        return  new R(true,20000,a);
-//    }
 }

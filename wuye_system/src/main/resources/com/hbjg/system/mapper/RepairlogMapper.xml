@@ -9,15 +9,15 @@
             tb_repairlog.id,
             tb_user.username as userUsername,
             tb_user.name as userName,
-            tb_property.pname as propertyName,
+            tb_property.name as propertyName,
             tb_repairlog.number,
             tb_property.spec as propertySpec,
             tb_repairlog.status,
             tb_repairlog.time,
             tb_repairlog.remark
 	    from tb_repairlog
-	        left join tb_user on tb_repairlog.user_id = tb_user.uid
-	        left join tb_property on tb_repairlog.property_id = tb_property.pid
+	        left join tb_user on tb_repairlog.user_id = tb_user.id
+	        left join tb_property on tb_repairlog.property_id = tb_property.id
 	    ${ew.customSqlSegment}
 
     </select>

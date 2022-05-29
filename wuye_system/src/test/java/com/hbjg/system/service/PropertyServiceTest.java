@@ -16,7 +16,7 @@ public class PropertyServiceTest {
     @Test
     public void getpagetest(){
         Property property = new Property();
-        property.setPname("鼠");
+        property.setName("鼠");
 //        property.setType(2);
         iPropertyService.getProMyPage(2,2,property);
     }

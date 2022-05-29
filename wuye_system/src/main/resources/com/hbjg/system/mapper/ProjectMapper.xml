@@ -6,10 +6,30 @@
        select
             tb_project.id,
             tb_project.name,
-            tb_user.name as fuzeren
+            tb_user.name as fuzeren,
+            tb_project.code,
+            tb_project.email
 	    from
-	        tb_project,tb_user
+	        tb_project
+	    left join
+	        tb_user on tb_project.user_id = tb_user.id
+    </select>
+
+    <update id="addUserByCode" parameterType="com.hbjg.system.pojo.Project">
+        update
+            tb_project
+        set
+            user_id=#{userId}
         where
-            tb_project.user_id = tb_user.uid
+            code=#{code}
+    </update>
+
+    <select id="selectByUserId" parameterType="integer" resultType="com.hbjg.system.pojo.Project">
+        select
+            *
+        from
+            tb_project
+        where
+            user_id = #{userId}
     </select>
 </mapper>

@@ -6,17 +6,17 @@
     <select id="selectUserMyPage"
             resultType="com.hbjg.system.pojo.UserListDto">
         select
-            tb_user.uid,
+            tb_user.id,
 	        tb_user.username,
 	        tb_user.password,
 	        tb_user.name,
 	        tb_user.phone,
-	        tb_role.rname,
-	        tb_department.dname,
+	        tb_role.name as roleName,
+	        tb_department.name as departmentName,
 	        tb_user.joindate
 	    from tb_user
-	        left join tb_role on tb_user.role = tb_role.rid
-	        left join tb_department on tb_user.department = tb_department.did
+	        left join tb_role on tb_user.role_id = tb_role.id
+	        left join tb_department on tb_user.department_id = tb_department.id
 	    ${ew.customSqlSegment}
 
     </select>
@@ -32,9 +32,9 @@
 		update
 			tb_user
 		set
-			role=#{rid}
+			role_id=#{rid}
 		where
-			uid=#{uid}
+			id=#{uid}
 	</update>
 
 </mapper>

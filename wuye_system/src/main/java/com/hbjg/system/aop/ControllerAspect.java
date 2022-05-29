@@ -31,19 +31,8 @@ public class ControllerAspect {
     private IOperationlogService iOperationlogService;
 
     private Object runAndSaveLog(ProceedingJoinPoint proceedingJoinPoint) {
-        //定义日期转换对象
-        SimpleDateFormat simpleDateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        //生成当前时间
-        String time = simpleDateFormat.format(new Date());
-        Date date = null;
-        try {
-            //转化成日期类
-            date = simpleDateFormat.parse(time);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String date=sdf.format(date1);
+        //定义日期
+        Date date = new Date();
         Object target = proceedingJoinPoint.getTarget();
         Signature signature = proceedingJoinPoint.getSignature();
         Operationlog operationlog = new Operationlog();
@@ -57,10 +46,11 @@ public class ControllerAspect {
                 result = proceedingJoinPoint.proceed();
                 R r = (R) result;
                 User u = (User) r.getData();
-//                System.out.println("用户id:"+u.getUid());
-                operationlog.setUserUsername(u.getUsername());
-//                System.out.println("用户账号:"+u.getUsername());
-                operationlog.setUserName(u.getName());
+                if(u!=null){
+                    operationlog.setUserUsername(u.getUsername());
+                    operationlog.setUserName(u.getName());
+                }
+
             } else if (signature.getName().equals("exit")) {
                 result = proceedingJoinPoint.proceed();
             } else {
@@ -68,7 +58,7 @@ public class ControllerAspect {
                 ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
                 HttpSession session = attr.getRequest().getSession(true);
                 User user = (User) session.getAttribute("user");
-                System.out.println("User=============="+user);
+//                System.out.println("User=============="+user);
                 operationlog.setUserUsername(user.getUsername());
                 operationlog.setUserName(user.getName());
                 result = proceedingJoinPoint.proceed();
@@ -80,81 +70,97 @@ public class ControllerAspect {
         }
         if(target.getClass().getSimpleName().equals("UserController")){
             operationlog.setOperationObj("用户");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("login")){
                 operationlog.setOperationType("登录");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("save")){
                 operationlog.setOperationType("新增");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("update")||signature.getName().equals("updateRole")){
                 operationlog.setOperationType("修改");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("delete")){
                 operationlog.setOperationType("删除");
-                operationlog.setOperationTime(date);
                }
         }
         if(target.getClass().getSimpleName().equals("PropertyController")){
             operationlog.setOperationObj("资产");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("delete")){
                 operationlog.setOperationType("删除");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("update")){
                 operationlog.setOperationType("修改");
-                operationlog.setOperationTime(date);
             }
+            if(signature.getName().equals("warehousing")){
+                operationlog.setOperationType("入库");
+            }
+            if(signature.getName().equals("delivery")){
+                operationlog.setOperationType("出库");
+            }
+        }
+        if(target.getClass().getSimpleName().equals("LendlogController")){
+            operationlog.setOperationObj("借出记录");
+            operationlog.setOperationTime(date);
+            if(signature.getName().equals("updateStatusByLlid")){
+                operationlog.setOperationType("审核");
+            }
+        }
+        if(target.getClass().getSimpleName().equals("ReturnlogController")){
+            operationlog.setOperationObj("归还记录");
+            operationlog.setOperationTime(date);
+            if(signature.getName().equals("updateStatusByRlid")){
+                operationlog.setOperationType("审核");
+            }
+        }
+        if(target.getClass().getSimpleName().equals("ProjectController")){
+            operationlog.setOperationObj("项目");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("save")){
                 operationlog.setOperationType("新增");
-                operationlog.setOperationTime(date);
+            }
+            if(signature.getName().equals("delete")){
+                operationlog.setOperationType("删除");
             }
         }
         if(target.getClass().getSimpleName().equals("StorageitemsController")){
             operationlog.setOperationObj("资产所在地");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("save")){
                 operationlog.setOperationType("新增");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("update")){
                 operationlog.setOperationType("修改");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("delete")){
                 operationlog.setOperationType("删除");
-                operationlog.setOperationTime(date);
             }
         }
         if(target.getClass().getSimpleName().equals("Type2Controller")){
             operationlog.setOperationObj("资产类型");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("saveType2")){
                 operationlog.setOperationType("新增");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("updateType2")){
                 operationlog.setOperationType("修改");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("deleteType2")){
                 operationlog.setOperationType("删除");
-                operationlog.setOperationTime(date);
             }
         }
         if(target.getClass().getSimpleName().equals("DepartmentController")){
             operationlog.setOperationObj("公司部门");
+            operationlog.setOperationTime(date);
             if(signature.getName().equals("save")){
                 operationlog.setOperationType("新增");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("update")){
                 operationlog.setOperationType("修改");
-                operationlog.setOperationTime(date);
             }
             if(signature.getName().equals("delete")){
                 operationlog.setOperationType("删除");
-                operationlog.setOperationTime(date);
             }
         }
 

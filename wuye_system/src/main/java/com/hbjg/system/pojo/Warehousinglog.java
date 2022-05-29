@@ -8,15 +8,15 @@ import java.util.Date;
 @Data
 public class Warehousinglog {
 
-    @TableId(value = "wlid")
-    private Integer wlid;
-    private Integer name;
-    private String pname;
-    private String spec;
-    private Integer number;
-    private Integer type;
-    private Integer type2;
-    private Date warehousingDate;
+    @TableId(value = "id")
+    private Integer id;
+    private Integer userId;
+    private String propertyName;
+    private String propertySpec;
+    private Integer propertyNumber;
+    private Integer typeId;
+    private Integer type2Id;
+    private Date time;
     private String imgSrc;
     private String remark;
 }

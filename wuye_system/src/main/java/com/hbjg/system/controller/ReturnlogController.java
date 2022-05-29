@@ -27,7 +27,7 @@ public class ReturnlogController {
 
     //修改审核状态进行审核
     @PutMapping
-    public R updateStatusByLlid(@RequestBody Returnlog returnlog){
+    public R updateStatusByRlid(@RequestBody Returnlog returnlog){
         return new R(true,20000,iReturnlogService.updateById(returnlog));
     }
 
@@ -39,8 +39,8 @@ public class ReturnlogController {
     }
 
     //通过id查询一条纪录
-    @GetMapping("/{rlid}")
-    public R getOneReturnlog(@PathVariable Integer rlid){
-        return new R(true,20000,iReturnlogService.getById(rlid));
+    @GetMapping("/{id}")
+    public R getOneReturnlog(@PathVariable Integer id){
+        return new R(true,20000,iReturnlogService.getById(id));
     }
 }

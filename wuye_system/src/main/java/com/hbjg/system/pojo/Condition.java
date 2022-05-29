@@ -8,7 +8,7 @@ public class Condition {
 
     private String propertyName;
     private Integer userId;
-    private String status;
+    private Integer status;
     private String begin;
     private String end;
 }

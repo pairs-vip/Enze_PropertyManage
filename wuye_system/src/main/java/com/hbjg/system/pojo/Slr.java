@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 public class Slr {
 
-    @TableId(value = "slrid")
-    private Integer slrid;
-    private Integer uid;
-    private Integer pid;
-    private Integer number;
+    @TableId(value = "id")
+    private Integer id;
+    private Integer userId;
+    private Integer propertyId;
+    private Integer propertyNumber;
 }

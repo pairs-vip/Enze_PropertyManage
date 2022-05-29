@@ -37,9 +37,9 @@ public class LendlogController {
         return new R(true,20000,iLendlogService.getLendForUser2(currentPage,pageSize,lendlog,session));
     }
     //通过id来查询一条纪录
-    @GetMapping("/{llid}")
-    public  R getOneLendlog(@PathVariable Integer llid){
-        return new R(true,20000,iLendlogService.getById(llid));
+    @GetMapping("/{id}")
+    public  R getOneLendlog(@PathVariable Integer id){
+        return new R(true,20000,iLendlogService.getById(id));
     }
 
 }

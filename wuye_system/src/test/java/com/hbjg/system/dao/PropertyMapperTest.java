@@ -17,7 +17,7 @@ public class PropertyMapperTest {
     public void test01(){
 
         Property property = new Property();
-        property.setPname("书本");
+        property.setName("书本");
         property.setNumber(23);
         property.setRemark("教师专用");
 

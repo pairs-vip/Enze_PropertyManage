@@ -15,17 +15,18 @@ import java.util.List;
 public interface UserMapper extends MyBaseMapper<User> {
 
     //查询所有用户
-    //@Select("select tb_user.uid,tb_user.username,tb_user.PASSWORD,tb_user.NAME,tb_user.phone,tb_role.rname,tb_department.dname,tb_user.joindate from tb_user,tb_role,tb_department where tb_user.role = tb_role.rid  AND tb_user.department = tb_department.did;")
-    //List<User> selectList(@Param(Constants.WRAPPER) Wrapper<UserListDto> queryWrapper);
     IPage<UserListDto> selectUserMyPage(IPage<UserListDto> page, @Param(Constants.WRAPPER) QueryWrapper<User> queryWrapper);
 
-
+    //更改职位
     Boolean updateRole(Integer uid, Integer rid);
 
+    //通过用户名密码和职位查找用户
     User findUserByUsernameAndPwdAndRole(@Param(Constants.WRAPPER) QueryWrapper<User> queryWrapper);
 
+    //查看所有以数据库中的格式返回
     List<User> findAll();
 
+    //通过id查找用户
     User findById(Integer id);
 }
 

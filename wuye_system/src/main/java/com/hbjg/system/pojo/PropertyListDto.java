@@ -7,12 +7,12 @@ import java.sql.Date;
 @Data
 public class PropertyListDto {
 
-    private Integer pid;
-    private String pname;
+    private Integer id;
+    private String name;
     private String spec;
     private Integer number;
-    private String tname;
-    private String t2name;
-    private String sname;
+    private String typeName;
+    private String type2Name;
+    private String storageitemsName;
     private String remark;
 }

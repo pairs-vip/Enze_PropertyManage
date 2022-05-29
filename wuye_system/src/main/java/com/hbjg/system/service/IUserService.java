@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
-import com.hbjg.system.pojo.WeChatLoginModel;
 
 import java.util.List;
 

@@ -27,10 +27,10 @@ public class PurhcaselogServiceImpl extends ServiceImpl<PurchaselogMapper, Purch
             queryWrapper.like("tb_purchaselog.property_name",condition.getPropertyName());
         }
         if(Strings.isNotEmpty(condition.getBegin())){
-            queryWrapper.ge("tb_purchaselog.purchaselog_time",condition.getBegin());
+            queryWrapper.ge("tb_purchaselog.time",condition.getBegin());
         }
         if(Strings.isNotEmpty(condition.getEnd())){
-            queryWrapper.le("tb_purchaselog.purchaselog_time",condition.getEnd());
+            queryWrapper.le("tb_purchaselog.time",condition.getEnd());
         }
         page = purchaselogMapper.selectPage(page, queryWrapper);
         return page;

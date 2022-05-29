@@ -1,6 +1,5 @@
 package com.hbjg.system.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,9 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hbjg.system.mapper.UserMapper;
 import com.hbjg.system.pojo.User;
 import com.hbjg.system.pojo.UserListDto;
-import com.hbjg.system.pojo.WeChatLoginModel;
 import com.hbjg.system.service.IUserService;
-import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +30,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("tb_user.username",username);
         queryWrapper.eq("tb_user.password",password);
-        queryWrapper.in("tb_user.role","1","2","3");
+        queryWrapper.in("tb_user.role_id","1","2","3");
         User user = userMapper.findUserByUsernameAndPwdAndRole(queryWrapper);
         return user;
     }
@@ -61,11 +58,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
         //将条件封装到QueryWrapper中
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        if(user.getRole()!=null) {
-            queryWrapper.like("tb_user.role", user.getRole());
+        if(user.getRoleId()!=null) {
+            queryWrapper.like("tb_user.role_id", user.getRoleId());
         }
-        if(user.getDepartment()!=null) {
-            queryWrapper.like("tb_user.department", user.getDepartment());
+        if(user.getDepartmentId()!=null) {
+            queryWrapper.like("tb_user.department_id", user.getDepartmentId());
         }
         IPage<UserListDto> page = new Page(currentPage,pageSize);
         page = userMapper.selectUserMyPage(page, queryWrapper);
@@ -78,10 +75,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
        return userMapper.updateRole(uid,rid);
     }
 
+    //通过职位筛选用户
     @Override
     public List<User> selectByRole(Integer rid) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
-        queryWrapper.eq("tb_user.role",rid);
+        queryWrapper.eq("tb_user.role_id",rid);
         return userMapper.selectList(queryWrapper);
     }
 

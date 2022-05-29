@@ -10,6 +10,7 @@ public class JwtUtil {
     private static long time = 1000*60*60*24;
     private static String signature = "admin";
 
+    //生成token
     public static String createToken(String value){
         JwtBuilder jwtBuilder = Jwts.builder();
         String jwtToken = jwtBuilder
@@ -27,6 +28,7 @@ public class JwtUtil {
         return jwtToken;
     }
 
+    //验证token
     public static boolean checkToken(String token){
         if(token == null) {
             return false;

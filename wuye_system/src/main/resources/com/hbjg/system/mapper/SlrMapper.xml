@@ -8,22 +8,22 @@
 		from
 			tb_slr
 		where
-			uid=#{uid} and pid=#{pid}
+			user_id=#{uid} and property_id=#{pid}
     </select>
 
 	<select id="selectSlrMyPage" resultType="com.hbjg.system.pojo.SlrListDto">
 		 select
-			s.slrid,
-			u.name,
+			s.id,
+			u.name as userName,
 			tb_project.name as projectName,
-			p.pname,
-			s.number,
-			p.spec
+			p.name as propertyName,
+			s.property_number as propertyNumber,
+			p.spec as propertySpec
 		from
 			tb_slr s
-		left join tb_user u on s.uid = u.uid
-		left join tb_property p on s.pid = p.pid
-		left join tb_project on s.uid = tb_project.user_id
+		left join tb_user u on s.user_id = u.id
+		left join tb_property p on s.property_id = p.id
+		left join tb_project on s.user_id = tb_project.user_id
 		${ew.customSqlSegment}
 	</select>
 
@@ -33,24 +33,24 @@
 		from
 			tb_slr
 		where
-			uid = #{uid}
+			user_id = #{uid}
 	</select>
 
 	<update id="AddNumByUidAndPid" parameterType="integer">
 		update
 			tb_slr
 		set
-			number=number+#{number}
+			property_number=property_number+#{number}
 		where
-			uid=#{uid} and pid=#{pid}
+			user_id=#{uid} and property_id=#{pid}
 	</update>
 
 	<update id="SubNumByUidAndPid" parameterType="integer">
 		update
 			tb_slr
 		set
-			number=number-#{number}
+			property_number=property_number-#{number}
 		where
-			uid=#{uid} and pid=#{pid}
+			user_id=#{uid} and property_id=#{pid}
 	</update>
 </mapper>

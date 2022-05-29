@@ -6,21 +6,21 @@
             resultType="com.hbjg.system.pojo.ReturnlogListDto">
 
         SELECT
-            tb_returnlog.rlid,
+            tb_returnlog.id,
             u1.username as returnee,
-            tb_property.pname,
+            tb_property.name as propertyName,
             u2.username as reviewer,
             tb_returnlog.time,
-            tb_returnlog.number,
-            tb_property.spec,
+            tb_returnlog.property_number as propertyNumber,
+            tb_property.spec as propertySpec,
             tb_returnlog.`status`,
             tb_returnlog.img_src,
             tb_returnlog.remark
         FROM
             tb_returnlog
-            LEFT JOIN tb_user u1 ON u1.uid = tb_returnlog.uid1
-            LEFT JOIN tb_user u2 ON u2.uid = tb_returnlog.uid2
-            LEFT JOIN tb_property ON tb_property.pid = tb_returnlog.pid
+            LEFT JOIN tb_user u1 ON u1.id = tb_returnlog.user_id1
+            LEFT JOIN tb_user u2 ON u2.id = tb_returnlog.user_id2
+            LEFT JOIN tb_property ON tb_property.id = tb_returnlog.property_id
 	    ${ew.customSqlSegment}
 
     </select>

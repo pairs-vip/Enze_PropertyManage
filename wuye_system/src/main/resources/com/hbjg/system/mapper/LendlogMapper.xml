@@ -6,22 +6,22 @@
             resultType="com.hbjg.system.pojo.LendlogListDto">
 
         SELECT
-            tb_lendlog.llid,
+            tb_lendlog.id,
             u1.username as borrower,
-            tb_lendlog.pid,
-            tb_property.pname,
+            tb_lendlog.property_id,
+            tb_property.name as propertyName,
             u2.username as reviewer,
             tb_lendlog.time,
-            tb_lendlog.number,
-            tb_property.spec,
+            tb_lendlog.property_number,
+            tb_property.spec as propertySpec,
             tb_lendlog.`status`,
             tb_lendlog.img_src,
             tb_lendlog.remark
         FROM
             tb_lendlog
-            LEFT JOIN tb_user u1 ON u1.uid = tb_lendlog.uid1
-            LEFT JOIN tb_user u2 ON u2.uid = tb_lendlog.uid2
-            LEFT JOIN tb_property ON tb_property.pid = tb_lendlog.pid
+            LEFT JOIN tb_user u1 ON u1.id = tb_lendlog.user_id1
+            LEFT JOIN tb_user u2 ON u2.id = tb_lendlog.user_id2
+            LEFT JOIN tb_property ON tb_property.id = tb_lendlog.property_id
 	    ${ew.customSqlSegment}
 
     </select>
@@ -30,21 +30,21 @@
             resultType="com.hbjg.system.pojo.LendlogListDto">
 
         SELECT
-            tb_lendlog.llid,
+            tb_lendlog.id,
             u1.username as borrower,
-            tb_property.pname,
+            tb_property.name as propertyName,
             u2.username as reviewer,
             tb_lendlog.time,
-            tb_lendlog.number,
-            tb_property.spec,
+            tb_lendlog.property_number,
+            tb_property.spec as propertySpec,
             tb_lendlog.`status`,
             tb_lendlog.img_src,
             tb_lendlog.remark
         FROM
             tb_lendlog
-            LEFT JOIN tb_user u1 ON u1.uid = tb_lendlog.uid1
-            LEFT JOIN tb_user u2 ON u2.uid = tb_lendlog.uid2
-            LEFT JOIN tb_property ON tb_property.pid = tb_lendlog.pid
+            LEFT JOIN tb_user u1 ON u1.id = tb_lendlog.user_id1
+            LEFT JOIN tb_user u2 ON u2.id = tb_lendlog.user_id2
+            LEFT JOIN tb_property ON tb_property.id = tb_lendlog.property_id
 	    ${ew.customSqlSegment}
 
     </select>

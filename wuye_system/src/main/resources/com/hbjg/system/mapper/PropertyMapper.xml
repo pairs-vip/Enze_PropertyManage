@@ -6,28 +6,28 @@
             resultType="com.hbjg.system.pojo.PropertyListDto">
 
         select
-            tb_property.pid,
-	        tb_property.pname,
+            tb_property.id,
+	        tb_property.name,
 	        tb_property.spec,
 	        tb_property.number,
-	        tb_type.tname,
-	        tb_type2.t2name,
-	        tb_storageitems.sname,
+	        tb_type.name as typeName,
+	        tb_type2.name as type2Name,
+	        tb_storageitems.name as storageitemsName,
 	        tb_property.remark
 	    from tb_property
-	        left join tb_type on tb_property.type = tb_type.tid
-	        left join tb_storageitems on tb_property.storageitems = tb_storageitems.sid
-	        left join tb_type2 on tb_property.type2 = tb_type2.t2id
+	        left join tb_type on tb_property.type_id = tb_type.id
+	        left join tb_storageitems on tb_property.storageitems_id = tb_storageitems.id
+	        left join tb_type2 on tb_property.type2_id = tb_type2.id
 	    ${ew.customSqlSegment}
 
     </select>
 
 	<update id="addNum" parameterType="integer" >
-		update tb_property set number=number+${number} where pid=${pid}
+		update tb_property set number=number+${number} where id=${pid}
 	</update>
 
 	<update id="subNum" parameterType="integer">
-		update tb_property set number=number-${number} where pid=${pid}
+		update tb_property set number=number-${number} where id=${pid}
 	</update>
 
 	<select id="selectProByName" resultType="com.hbjg.system.pojo.Property">
@@ -36,7 +36,7 @@
 		from
 			tb_property
 		where
-			pname=${pname}
+			name=${pname}
 
 	</select>
 
@@ -46,7 +46,7 @@
 		from
 			tb_property
 		where
-			pname='${pname}' and spec='${spec}'
+			name='${pname}' and spec='${spec}'
 	</select>
 
 	<select id="selectProByNameAndSpecAndType" resultType="com.hbjg.system.pojo.Property">
@@ -56,6 +56,6 @@
 		from
 			tb_property
 		where
-			pname='${pname}' and spec='${spec}'and type=${type} and type2=${type2}
+			name='${pname}' and spec='${spec}'and type_id=${type} and type2_id=${type2}
 	</select>
 </mapper>

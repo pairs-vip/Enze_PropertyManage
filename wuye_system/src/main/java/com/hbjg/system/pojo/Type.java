@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class Type {
 
-    @TableId(value = "tid")
-    private Integer tid;
-    private String tname;
+    @TableId(value = "id")
+    private Integer id;
+    private String name;
 }

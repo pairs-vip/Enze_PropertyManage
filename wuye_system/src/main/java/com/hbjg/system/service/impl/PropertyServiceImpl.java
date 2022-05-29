@@ -25,15 +25,15 @@ public class PropertyServiceImpl extends ServiceImpl<PropertyMapper, Property> i
 
         IPage<PropertyListDto> page = new Page(currentPage,pageSize);
         QueryWrapper<Property> queryWrapper = new QueryWrapper<Property>();
-        if(Strings.isNotEmpty(property.getPname())){
-            queryWrapper.like("tb_property.pname",property.getPname());
+        if(Strings.isNotEmpty(property.getName())){
+            queryWrapper.like("tb_property.name",property.getName());
         }
 
-        if(property.getType() != null) {
-            queryWrapper.eq("tb_property.type", property.getType());
+        if(property.getTypeId() != null) {
+            queryWrapper.eq("tb_property.type_id", property.getTypeId());
         }
-        if(property.getType2() != null){
-            queryWrapper.eq("tb_property.type2",property.getType2());
+        if(property.getType2Id() != null){
+            queryWrapper.eq("tb_property.type2_id",property.getType2Id());
         }
 
 

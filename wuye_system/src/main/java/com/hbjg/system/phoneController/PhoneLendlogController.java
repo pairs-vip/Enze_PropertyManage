@@ -29,7 +29,7 @@ public class PhoneLendlogController {
     public R saveLendLog(@RequestBody Lendlog lendlog,HttpSession session){
         User user = (User) session.getAttribute("user");
         if(user!=null){
-            lendlog.setUid1(user.getUid());
+            lendlog.setUserId1(user.getId());
         }
         return new R(true,20000,iLendlogService.save(lendlog));
     }
@@ -40,18 +40,13 @@ public class PhoneLendlogController {
         User user = (User) session.getAttribute("user");
         if(user!=null){
             for (Lendlog lendlog : lendlogs) {
-                lendlog.setUid1(user.getUid());
+                lendlog.setUserId1(user.getId());
                 iLendlogService.save(lendlog);
             }
         }
         return new R(true,20000,"借出纪录添加成功");
     }
 
-    //将未同意改为已同意
-//    @PutMapping
-//    public R updateStatusByLlid(@RequestBody Lendlog lendlog){
-//        return new R(true,iLendlogService.updateById(lendlog));
-//    }
     //通过当前用户查看,查看当前登录用户的借出纪录
     @PostMapping("/getforuser1/{currentPage}/{pageSize}")
     public R getLendForUser1(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Lendlog lendlog){
@@ -59,10 +54,5 @@ public class PhoneLendlogController {
         System.out.println("sesssioncontroller:"+user);
         return new R(true,20000,iLendlogService.getLendForUser1(currentPage,pageSize,lendlog,session));
     }
-    //通过当前用户查看,查看以自己为审核人的借出纪录
-//    @PostMapping("/getforuser2/{currentPage}/{pageSize}")
-//    public R getLendForUser2(@PathVariable Integer currentPage, @PathVariable Integer pageSize, HttpSession session, @RequestBody Lendlog lendlog){
-//        return new R(true,iLendlogService.getLendForUser2(currentPage,pageSize,lendlog,session));
-//    }
 
 }

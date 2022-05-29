@@ -8,14 +8,14 @@ import java.util.Date;
 @Data
 public class Backlog {
 
-    @TableId(value = "backlog_id")
-    private Integer backlogId;
+    @TableId(value = "id")
+    private Integer id;
     private String userName;
     private String propertyName;
     private Integer propertyNumber;
     private String propertySpec;
     private String propertyUnitprice;
     private String propertySumprice;
-    private Date backlogTime;
-    private String backlogRemark;
+    private Date time;
+    private String remark;
 }

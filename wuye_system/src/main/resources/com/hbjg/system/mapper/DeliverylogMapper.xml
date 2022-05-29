@@ -6,21 +6,21 @@
             resultType="com.hbjg.system.pojo.DeliverylogListDto">
 
         SELECT
-            tb_deliverylog.dlid,
-            tb_user.NAME,
-            tb_deliverylog.pname,
-            tb_deliverylog.spec,
-            tb_deliverylog.number,
-            tb_type.tname,
-            tb_type2.t2name,
-            tb_deliverylog.delivery_date,
+            tb_deliverylog.id,
+            tb_user.name as userName,
+            tb_deliverylog.property_name,
+            tb_deliverylog.property_spec,
+            tb_deliverylog.property_number,
+            tb_type.name as typeName,
+            tb_type2.name as type2Name,
+            tb_deliverylog.time,
             tb_deliverylog.img_src,
             tb_deliverylog.remark
         FROM
             tb_deliverylog
-            LEFT JOIN tb_user ON tb_deliverylog.NAME = tb_user.uid
-            LEFT JOIN tb_type ON tb_deliverylog.type = tb_type.tid
-            LEFT JOIN tb_type2 ON tb_deliverylog.type2 = tb_type2.t2id
+            LEFT JOIN tb_user ON tb_deliverylog.user_id = tb_user.id
+            LEFT JOIN tb_type ON tb_deliverylog.type_id = tb_type.id
+            LEFT JOIN tb_type2 ON tb_deliverylog.type2_id = tb_type2.id
 	    ${ew.customSqlSegment}
 
     </select>

@@ -28,11 +28,11 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
 
         QueryWrapper<Condition> queryWrapper = new QueryWrapper<>();
         if(Strings.isNotEmpty(condition.getPropertyName())){
-            queryWrapper.like("tb_property.pname",condition.getPropertyName());
+            queryWrapper.like("tb_property.name",condition.getPropertyName());
         }
         User user = (User) session.getAttribute("user");
         if(user!=null){
-            queryWrapper.eq("s.uid",user.getUid());
+            queryWrapper.eq("s.user_id",user.getId());
         }
 
         page = slrMapper.selectSlrMyPage(page,queryWrapper);
@@ -47,7 +47,7 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
 
         QueryWrapper<Condition> queryWrapper = new QueryWrapper<>();
         if(Strings.isNotEmpty(condition.getPropertyName())){
-            queryWrapper.like("tb_property.pname",condition.getPropertyName());
+            queryWrapper.like("tb_property.name",condition.getPropertyName());
         }
 
         page = slrMapper.selectSlrMyPage(page,queryWrapper);
@@ -64,18 +64,18 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
     //进行汇总表得借出修改操作，如果已经存在同一个人借出同一物品，则直接进行数量增加，如果不是这样则新生成一条。
     @Override
     public Boolean AddNumByUidAndPid(Lendlog lendlog) {
-        Integer uid = lendlog.getUid1();
-        Integer pid = lendlog.getPid();
-        Integer number = lendlog.getNumber();
+        Integer uid = lendlog.getUserId1();
+        Integer pid = lendlog.getPropertyId();
+        Integer number = lendlog.getPropertyNumber();
         System.out.println("service"+lendlog);
         Slr slr = slrMapper.selectByUidAndPid(uid, pid);
         if(slr!=null){
             return slrMapper.AddNumByUidAndPid(uid, pid, number);
         }else{
             Slr slr1 = new Slr();
-            slr1.setUid(uid);
-            slr1.setPid(pid);
-            slr1.setNumber(number);
+            slr1.setId(uid);
+            slr1.setPropertyId(pid);
+            slr1.setPropertyNumber(number);
             int insert = slrMapper.insert(slr1);
             if(insert!=0){
                 return true;
@@ -88,12 +88,16 @@ public class SlrServiceImpl extends ServiceImpl<SlrMapper, Slr> implements ISlrS
     //进行汇总表得归还修改，如果归还之后这条纪录为0，则删除。
     @Override
     public Boolean SubNumByUidAndPid(Returnlog returnlog) {
-        Integer uid = returnlog.getUid1();
-        Integer pid = returnlog.getPid();
-        Integer number = returnlog.getNumber();
+        Integer uid = returnlog.getUserId1();
+        Integer pid = returnlog.getPropertyId();
+        Integer number = returnlog.getPropertyNumber();
         Boolean aBoolean = slrMapper.SubNumByUidAndPid(uid, pid, number);
         Slr slr = slrMapper.selectByUidAndPid(uid, pid);
-        slrMapper.deleteById(slr.getSlrid());
+        if(slr.getPropertyNumber()!=0){
+
+        }else{
+            slrMapper.deleteById(slr.getId());
+        }
         return aBoolean;
     }
 

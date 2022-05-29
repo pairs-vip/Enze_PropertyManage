@@ -8,15 +8,15 @@ import java.util.Date;
 @Data
 public class Deliverylog {
 
-    @TableId(value = "dlid")
-    private Integer dlid;
-    private Integer name;
-    private String pname;
-    private String spec;
-    private Integer number;
-    private String type;
-    private String type2;
-    private Date deliveryDate;
+    @TableId(value = "id")
+    private Integer id;
+    private Integer userId;
+    private String propertyName;
+    private String propertySpec;
+    private Integer propertyNumber;
+    private Integer typeId;
+    private Integer type2Id;
+    private Date time;
     private String imgSrc;
     private String remark;
 }

@@ -9,13 +9,13 @@ import java.util.Date;
 public class Returnlog {
 
 
-    @TableId(value = "rlid")
-    private Integer rlid;
-    private Integer uid1;
-    private Integer pid;
-    private Integer uid2;
-    private Integer number;
-    private String status;
+    @TableId(value = "id")
+    private Integer id;
+    private Integer userId1;
+    private Integer propertyId;
+    private Integer userId2;
+    private Integer propertyNumber;
+    private Integer status;
     private Date time;
     private String imgSrc;
     private String remark;

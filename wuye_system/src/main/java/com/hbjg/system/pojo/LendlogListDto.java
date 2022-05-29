@@ -10,15 +10,15 @@ import java.util.Date;
 public class LendlogListDto {
 
 
-    @TableId(value = "llid")
-    private Integer llid;
+    @TableId(value = "id")
+    private Integer id;
     private String borrower;
-    private Integer pid;
-    private String pname;
+    private Integer propertyId;
+    private String propertyName;
     private String reviewer;
-    private Integer number;
-    private String spec;
-    private String status;
+    private Integer propertyNumber;
+    private String propertySpec;
+    private Integer status;
     private Date time;
     private String imgSrc;
     private String remark;

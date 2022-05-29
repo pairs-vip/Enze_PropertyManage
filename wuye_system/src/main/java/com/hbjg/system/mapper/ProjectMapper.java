@@ -10,4 +10,8 @@ import java.util.List;
 public interface ProjectMapper extends MyBaseMapper<Project> {
 
     List<ProjectListDto> findAll();
+
+    Integer addUserByCode(Project project);
+
+    Project selectByUserId(Integer userId);
 }

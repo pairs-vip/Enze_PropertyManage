@@ -8,14 +8,14 @@ import java.util.Date;
 @Data
 public class DeliverylogListDto {
 
-    private Integer dlid;
-    private String name;
-    private String pname;
-    private String spec;
-    private Integer number;
-    private String tname;
-    private String t2name;
-    private Date deliveryDate;
+    private Integer id;
+    private String userName;
+    private String propertyName;
+    private String propertySpec;
+    private Integer propertyNumber;
+    private String typeName;
+    private String type2Name;
+    private Date time;
     private String imgSrc;
     private String remark;
 }

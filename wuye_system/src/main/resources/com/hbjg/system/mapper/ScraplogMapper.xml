@@ -9,14 +9,14 @@
             tb_scraplog.id,
             tb_user.username as userUsername,
             tb_user.name as userName,
-            tb_property.pname as propertyName,
+            tb_property.name as propertyName,
             tb_scraplog.number,
             tb_property.spec as propertySpec,
             tb_scraplog.time,
             tb_scraplog.remark
 	    from tb_scraplog
-	        left join tb_user on tb_scraplog.user_id = tb_user.uid
-	        left join tb_property on tb_scraplog.property_id = tb_property.pid
+	        left join tb_user on tb_scraplog.user_id = tb_user.id
+	        left join tb_property on tb_scraplog.property_id = tb_property.id
 	    ${ew.customSqlSegment}
 
     </select>

@@ -26,10 +26,10 @@ public class BacklogServiceImpl extends ServiceImpl<BacklogMapper, Backlog> impl
             queryWrapper.like("tb_backlog.property_name",condition.getPropertyName());
         }
         if(Strings.isNotEmpty(condition.getBegin())){
-            queryWrapper.ge("tb_backlog.backlog_time",condition.getBegin());
+            queryWrapper.ge("tb_backlog.time",condition.getBegin());
         }
         if(Strings.isNotEmpty(condition.getEnd())){
-            queryWrapper.le("tb_backlog.backlog_time",condition.getEnd());
+            queryWrapper.le("tb_backlog.time",condition.getEnd());
         }
          page = backlogMapper.selectPage(page, queryWrapper);
         return page;

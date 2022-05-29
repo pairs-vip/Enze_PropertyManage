@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 public class Department {
 
-    @TableId(value="did")
-    private Integer did;
-    private String dname;
+    @TableId(value="id")
+    private Integer id;
+    private String name;
     private String description;
 }

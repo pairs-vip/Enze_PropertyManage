@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class Storageitems {
 
-    @TableId(value = "sid")
-    private Integer sid;
-    private String sname;
+    @TableId(value = "id")
+    private Integer id;
+    private String name;
 }

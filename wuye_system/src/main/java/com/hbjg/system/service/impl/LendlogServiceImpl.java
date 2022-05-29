@@ -30,14 +30,14 @@ public class LendlogServiceImpl extends ServiceImpl<LendlogMapper, Lendlog> impl
 
         QueryWrapper<Lendlog> queryWrapper = new QueryWrapper<>();
         String propertyName = condition.getPropertyName();
-        String status = condition.getStatus();
+        Integer status = condition.getStatus();
         String begin = condition.getBegin();
         String end = condition.getEnd();
 
         if(Strings.isNotEmpty(propertyName)) {
-            queryWrapper.like("tb_property.pname", propertyName);
+            queryWrapper.like("tb_property.name", propertyName);
         }
-        if(Strings.isNotEmpty(status)) {
+        if(status!=null) {
             queryWrapper.like("tb_lendlog.status", status);
         }
         if(Strings.isNotEmpty(begin)) {
@@ -61,17 +61,18 @@ public class LendlogServiceImpl extends ServiceImpl<LendlogMapper, Lendlog> impl
         QueryWrapper<Lendlog> queryWrapper = new QueryWrapper<Lendlog>();
 
         if(user!=null){
-            Integer uid = user.getUid();
-            queryWrapper.eq("tb_lendlog.uid1",uid);
+            Integer uid = user.getId();
+            queryWrapper.eq("tb_lendlog.user_id1",uid);
         }
-        String status = lendlog.getStatus();
-        if(Strings.isNotEmpty(status)){
+        Integer status = lendlog.getStatus();
+        if(status!=null){
             queryWrapper.eq("tb_lendlog.status",status);
         }
         page = lendlogMapper.selectLendlogMyPage(page,queryWrapper);
         return page;
     }
 
+    //查看自己是审核人的纪录
     @Override
     public IPage<LendlogListDto> getLendForUser2(Integer currentPage,Integer pageSize,Lendlog lendlog,HttpSession session) {
 
@@ -79,11 +80,11 @@ public class LendlogServiceImpl extends ServiceImpl<LendlogMapper, Lendlog> impl
         User user = (User)session.getAttribute("user");
         QueryWrapper<Lendlog> queryWrapper = new QueryWrapper<Lendlog>();
         if(user!=null){
-            Integer uid = user.getUid();
-            queryWrapper.eq("tb_lendlog.uid2",uid);
+            Integer uid = user.getId();
+            queryWrapper.eq("tb_lendlog.user_id2",uid);
         }
-        String status = lendlog.getStatus();
-        if(Strings.isNotEmpty(status)){
+        Integer status = lendlog.getStatus();
+        if(status!=null){
             queryWrapper.eq("tb_lendlog.status",status);
         }
         page = lendlogMapper.selectLendlogMyPage(page,queryWrapper);

@@ -31,14 +31,14 @@ public class ReturnlogServiceImpl extends ServiceImpl<ReturnlogMapper, Returnlog
         QueryWrapper<Returnlog> queryWrapper = new QueryWrapper<>();
 
         String propertyName = condition.getPropertyName();
-        String status = condition.getStatus();
+        Integer status = condition.getStatus();
         String begin = condition.getBegin();
         String end = condition.getEnd();
 
         if(Strings.isNotEmpty(propertyName)) {
             queryWrapper.like("tb_property.pname", propertyName);
         }
-        if(Strings.isNotEmpty(status)) {
+        if(status!=null) {
             queryWrapper.like("tb_returnlog.status", status);
         }
         if(Strings.isNotEmpty(begin)) {
@@ -61,11 +61,11 @@ public class ReturnlogServiceImpl extends ServiceImpl<ReturnlogMapper, Returnlog
         User user = (User)session.getAttribute("user");
         QueryWrapper<Returnlog> queryWrapper = new QueryWrapper<>();
         if(user!=null){
-            Integer uid = user.getUid();
-            queryWrapper.eq("tb_returnlog.uid1",uid);
+            Integer uid = user.getId();
+            queryWrapper.eq("tb_returnlog.user_id1",uid);
         }
-        String status = returnlog.getStatus();
-        if(Strings.isNotEmpty(status)){
+        Integer status = returnlog.getStatus();
+        if(status!=null){
             queryWrapper.eq("tb_returnlog.status",status);
         }
         page = returnlogMapper.selectReturnlogMyPage(page,queryWrapper);
@@ -79,11 +79,11 @@ public class ReturnlogServiceImpl extends ServiceImpl<ReturnlogMapper, Returnlog
         User user = (User)session.getAttribute("user");
         QueryWrapper<Returnlog> queryWrapper = new QueryWrapper<>();
         if(user!=null){
-            Integer uid = user.getUid();
-            queryWrapper.eq("tb_returnlog.uid2",uid);
+            Integer uid = user.getId();
+            queryWrapper.eq("tb_returnlog.user_id2",uid);
         }
-        String status = returnlog.getStatus();
-        if(Strings.isNotEmpty(status)){
+        Integer status = returnlog.getStatus();
+        if(status!=null){
             queryWrapper.eq("tb_returnlog.status",status);
         }
         page = returnlogMapper.selectReturnlogMyPage(page,queryWrapper);

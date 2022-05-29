@@ -9,13 +9,13 @@ import java.sql.Date;
 @Data
 public class Property {
 
-    @TableId(value = "pid")
-    private Integer pid;
-    private String pname;
+    @TableId(value = "id")
+    private Integer id;
+    private String name;
     private String spec;
     private Integer number;
-    private Integer type;
-    private Integer type2;
-    private Integer storageitems;
+    private Integer typeId;
+    private Integer type2Id;
+    private Integer storageitemsId;
     private String remark;
 }

@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class Type2 {
 
-    @TableId(value = "t2id")
-    private Integer t2id;
-    private Integer tid;
-    private String t2name;
+    @TableId(value = "id")
+    private Integer id;
+    private Integer typeId;
+    private String name;
 }

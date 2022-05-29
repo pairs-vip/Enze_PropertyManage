@@ -9,14 +9,14 @@ import java.util.Date;
 public class ReturnlogListDto {
 
 
-    @TableId(value = "rlid")
-    private Integer rlid;
+    @TableId(value = "id")
+    private Integer id;
     private String returnee;
-    private String pname;
+    private String propertyName;
     private String reviewer;
-    private Integer number;
-    private String spec;
-    private String status;
+    private Integer propertyNumber;
+    private String propertySpec;
+    private Integer status;
     private Date time;
     private String imgSrc;
     private String remark;

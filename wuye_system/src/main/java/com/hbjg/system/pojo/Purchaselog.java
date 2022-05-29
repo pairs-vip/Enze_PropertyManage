@@ -9,14 +9,14 @@ import java.util.Date;
 @Data
 public class Purchaselog {
 
-    @TableId(value = "purchaselog_id")
-    private Integer purchaselogId;
+    @TableId(value = "id")
+    private Integer id;
     private String userName;
     private String propertyName;
     private Integer propertyNumber;
     private String propertySpec;
     private Double propertyUnitprice;
     private Double propertySumprice;
-    private Date purchaselogTime;
-    private String purchaselogRemark;
+    private Date time;
+    private String remark;
 }

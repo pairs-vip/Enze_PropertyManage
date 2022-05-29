@@ -13,4 +13,5 @@ public class OfficalWeb {
     private Integer id;
     private String title;
     private String content;
+    private String imgSrc;
 }

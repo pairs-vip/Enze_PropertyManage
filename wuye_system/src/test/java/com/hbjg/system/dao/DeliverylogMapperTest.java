@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Date;
+
 @SpringBootTest
 public class DeliverylogMapperTest {
 
@@ -24,5 +26,11 @@ public class DeliverylogMapperTest {
         queryWrapper.like("tb_user.name","三");
         page = deliverylogMapper.selectDlogMyPage(page, queryWrapper);
         System.out.println(page);
+    }
+
+    @Test
+    public void date(){
+        Date date = new Date();
+        System.out.println(date);
     }
 }

@@ -82,7 +82,7 @@ public class PhoneUserController {
      * * @param model
      * * @return     */
     @GetMapping("/wxLogin")
-    private R wxlogin(String code,HttpSession session) {
+    public R wxlogin(String code,HttpSession session) {
         System.out.println(code);
         // 创建Httpclient对象
         CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -128,7 +128,7 @@ public class PhoneUserController {
             }else {
                 User user1 = new User();
                 user1.setUsername(openid);
-                user1.setRole(4);
+                user1.setRoleId(4);
                 Date date = new Date();
                 user1.setJoindate(date);
                 iUserService.save(user1);
@@ -145,35 +145,6 @@ public class PhoneUserController {
     }
 
 
-    //根据username或者id查询
-//    @GetMapping("/{UsernameOrId}")
-//    public R getOneByUsername(@PathVariable String UsernameOrId){
-//
-//        if(UsernameOrId.matches(".*[a-zA-Z].*")){
-//            return new R(true,iUserService.getByUsername(UsernameOrId));
-//        }else{
-//            return new R(true,iUserService.getById(UsernameOrId));
-//
-//        }
-//    }
-      //分页查询
-//    @GetMapping("/getPage/{currentPage}/{pageSize}")
-//    public R getByPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize){
-//        return new R(true,iUserService.getByPage(currentPage,pageSize));
-//    }
-
-    //添加操作
-//    @PostMapping
-//    public R save(@RequestBody User user){
-//        return new R(iUserService.save(user));
-//    }
-
-    //修改职位
-//    @PutMapping("/updateRole/{uid}/{rid}")
-//    public R updateRole(@PathVariable Integer uid,@PathVariable Integer rid ){
-//        return new R(iUserService.updateRole(uid,rid));
-//    }
-
     //更新操作
     @PutMapping
     public R update(@RequestBody User user){
@@ -184,17 +155,7 @@ public class PhoneUserController {
     @DeleteMapping
     public R delete(HttpSession session){
         User user = (User)session.getAttribute("user");
-        return new R(true,20000,iUserService.removeById(user.getUid()));
+        return new R(true,20000,iUserService.removeById(user.getId()));
     }
 
-    //分页查询，带条件，多表查询
-//    @GetMapping("/{currentPage}/{pageSize}")
-//    public R getMyPage(@PathVariable Integer currentPage,@PathVariable Integer pageSize,User user){
-//
-//        IPage<UserListDto> page = iUserService.getUserMyPage(currentPage,pageSize,user);
-//        if(currentPage > page.getPages()){
-//            page = iUserService.getUserMyPage((int)page.getPages(),pageSize,user);
-//        }
-//        return new R(true,page);
-//    }
 }
